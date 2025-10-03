@@ -1,7 +1,7 @@
 import db from "../client.js";
 
 await db.connect();
-await seedRoles();
+await seedSpecialPricing();
 await db.end();
 console.log("🌱 Roles seeded.");
 
