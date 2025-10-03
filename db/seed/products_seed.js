@@ -7,62 +7,71 @@ console.log("🌱 Products seeded.");
 
 async function seedProducts() {
   const products = [
-     {
-    product_name: "Bluetooth Speaker",
-    product_category: "electronics",
-    product_description: "Portable wireless speaker with 10-hour battery life.",
-    basic_price: 29.99,
-    product_img: "images/speaker.jpg"
-  },
-  {
-    product_name: "Wireless Mouse",
-    product_category: "electronics",
-    product_description: "Ergonomic mouse with adjustable DPI and silent clicks.",
-    basic_price: 15.49,
-    product_img: "images/mouse.jpg"
-  },
-  {
-    product_name: "Noise-Canceling Headphones",
-    product_category: "electronics",
-    product_description: "Over-ear headphones with active noise cancellation.",
-    basic_price: 89.95,
-    product_img: "images/headphones.jpg"
-  },
-  {
-    product_name: "Smartphone Tripod",
-    product_category: "electronics",
-    product_description: "Adjustable tripod stand for smartphones with Bluetooth remote.",
-    basic_price: 19.99,
-    product_img: "images/tripod.jpg"
-  },
-  {
-    product_name: "USB-C Charger",
-    product_category: "electronics",
-    product_description: "Fast-charging USB-C wall charger with 20W output.",
-    basic_price: 12.99,
-    product_img: "images/charger.jpg"
-  },
-  {
-    product_name: "Smartwatch",
-    product_category: "electronics",
-    product_description: "Waterproof smartwatch with heart rate and sleep tracking.",
-    basic_price: 59.95,
-    product_img: "images/smartwatch.jpg"
-  },
-  {
-    product_name: "LED Monitor",
-    product_category: "electronics",
-    product_description: "24-inch Full HD monitor with HDMI and VGA ports.",
-    basic_price: 129.99,
-    product_img: "images/monitor.jpg"
-  },
-  {
-    product_name: "Portable SSD",
-    product_category: "electronics",
-    product_description: "500GB external SSD with USB 3.1 interface.",
-    basic_price: 74.99,
-    product_img: "images/ssd.jpg"
-  },
+    {
+      product_name: "Monitor",
+      product_category: "electronics",
+      product_description: "A high-quality monitor for test environments.",
+      basic_price: 199.99,
+      product_img:
+        "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg",
+    },
+    {
+      product_name: "Wireless Mouse",
+      product_category: "electronics",
+      product_description: "Wireless mouse with ergonomic design.",
+      basic_price: 29.99,
+      product_img:
+        "https://images.pexels.com/photos/6214382/pexels-photo-6214382.jpeg",
+    },
+    {
+      product_name: "Printer",
+      product_category: "electronics",
+      product_description: "Compact black-and-white laser printer.",
+      basic_price: 149.99,
+      product_img:
+        "https://images.pexels.com/photos/4792283/pexels-photo-4792283.jpeg",
+    },
+    {
+      product_name: "USB-C Hub",
+      product_category: "electronics",
+      product_description:
+        "USB-C hub with multiple ports for device connectivity.",
+      basic_price: 39.99,
+      product_img:
+        "https://images.pexels.com/photos/20076003/pexels-photo-20076003.jpeg",
+    },
+    {
+      product_name: "Headset",
+      product_category: "electronics",
+      product_description: "Noise-canceling wireless headset.",
+      basic_price: 89.99,
+      product_img:
+        "https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg",
+    },
+    {
+      product_name: "Webcam",
+      product_category: "electronics",
+      product_description: "HD webcam suitable for video conferencing.",
+      basic_price: 59.99,
+      product_img:
+        "https://images.pexels.com/photos/10864867/pexels-photo-10864867.jpeg",
+    },
+    {
+      product_name: "UPS Backup",
+      product_category: "electronics",
+      product_description: "Battery backup power supply for critical devices.",
+      basic_price: 129.99,
+      product_img:
+        "https://m.media-amazon.com/images/I/61y3rExUuoL._AC_SX208_CB1169409_QL70_.jpg",
+    },
+    {
+      product_name: "Docking Station",
+      product_category: "electronics",
+      product_description: "Docking station for laptops and monitors.",
+      basic_price: 109.99,
+      product_img:
+        "https://m.media-amazon.com/images/I/71HWuNfplFL._AC_SX208_CB1169409_QL70_.jpg",
+    },
     {
       product_name: "",
       product_category: "vehicles",
