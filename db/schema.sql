@@ -34,7 +34,6 @@ CREATE TABLE customers(
     company_name TEXT,
     contact_name TEXT,
     email TEXT NOT NULL,
-    price_tier_id INT REFERENCES price_categories(id) NOT NULL,
     assigned_salesman_id INT REFERENCES users(id) NOT NULL
 );
 
@@ -47,6 +46,13 @@ CREATE TABLE products(
     product_img VARCHAR(500) NOT NULL
 );
 
+CREATE TABLE customer_category_pricing(
+    id SERIAL PRIMARY KEY,
+    customer_id INT REFERENCES customers(id) NOT NULL,
+    product_category VARCHAR(100) NOT NULL,
+    price_tier_id INT REFERENCES price_categories(id) NOT NULL,
+    UNIQUE(customer_id, product_category)
+);
 CREATE TABLE special_pricing(
     id SERIAL PRIMARY KEY,
     product_id INT REFERENCES products(id) NOT NULL,

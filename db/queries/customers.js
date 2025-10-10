@@ -4,19 +4,34 @@ export async function createCustomers(
   user_id,
   company_name,
   contact_name,
-  price_tier_id,
   assigned_salesman_id
 ) {
   const SQL = `
-    INSERT INTO customers (user_id, company_name, contact_name, price_tier_id, assigned_salesman_id)
+    INSERT INTO customers (user_id, company_name, contact_name, assigned_salesman_id)
     VALUES ($1, $2, $3, $4, $5)
     RETURNING *
     `;
   const { rows: customers } = await db.query(
     SQL,
-    (user_id, company_name, contact_name, price_tier_id, assigned_salesman_id)
+    (user_id, company_name, contact_name, assigned_salesman_id)
   );
   return customers;
+}
+
+export async function leftJoinAssigned_Salesman_Id() {
+  const SQL = `
+     SELECT
+     customers.id,
+     customers.company_name,
+     customers.contact_name,
+     customers.assigned_salesman_id,
+     users.id AS salesman_id,
+     users.email AS salesman_email
+     FROM customers
+     LEFT JOIN users ON customers.assigned_salesman_id = users.id
+    `;
+  const { rows: assignSalesman } = await db.query(SQL);
+  return assignSalesman;
 }
 
 export async function getCustomerByUser_Id(user_id) {

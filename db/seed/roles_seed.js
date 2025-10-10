@@ -16,12 +16,12 @@ async function seedRoles() {
       role_name: "Salesman",
       description:
         "Salesman have access to salesman and customer service pages",
-      role_level: 2,
+      role_level: 3,
     },
     {
       role_name: "Customer Service",
       description: "Customer Service has access to the customer service page",
-      role_level: 3,
+      role_level: 2,
     },
     {
       role_name: "Customer",

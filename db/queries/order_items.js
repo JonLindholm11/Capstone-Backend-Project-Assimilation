@@ -24,6 +24,18 @@ export async function createOrder_Items(
   return order_items;
 }
 
+export async function joinCustomer_id() {
+    const SQL = `
+    SELECT
+    customers.company_name,
+    customers.contact_name,
+    customers.email,
+    customers.price_tier_id,
+    customers.assigned_salesman_id,
+    
+    `
+}
+
 export async function getOrder_Items(
   order_id,
   product_id,
