@@ -11,7 +11,7 @@ as well as routes to register and login.
 
 ## Project Board Assignments
  - PROJECT SCHEMA
-- [x] Tables built out in schema for our 9 tables that we currently support - Jon
+- [x] Tables built out in schema for our 9 tables that we currently support - Jon  
 - PROJECT SEED FOLDER
 - [x] Json is added to the customer_category file -Jon
 - [ ] seed function is added to the customer_category file - Jon 
@@ -30,7 +30,7 @@ as well as routes to register and login.
 - [x] Json is added to the special_pricing file - Jon
 - [ ] seed function is added to the special_pricing file - Jon
 - [x] Json is added to the users file -Jon
-- [ ] seed function is added to the users file - Jon
+- [ ] seed function is added to the users file - Jon  
 - PROJECT QUERIES FOLDER
 - [ ] seed query wrtten for customer_category file - Jon
 - [ ] get all query written for the customer_category file - Jon
@@ -58,7 +58,7 @@ as well as routes to register and login.
 - [x] get specific items query written for the special_pricing - Jon 
 - [x] seed query wrtten for users file - Jon
 - [x] get all query written for the users file - Jon
-- [x] get specific items query written for the users - Jon
+- [x] get specific items query written for the users - Jon  
 - PROJECT API FOLDER
 - [ ]  api endpoint for all customer_category items - Jon
 - [ ]  api endpoint for single customer_category items - Jon
@@ -86,7 +86,7 @@ as well as routes to register and login.
 - [ ]  api post for special_pricing items if needed - Jon
 - [ ]  api endpoint for all users items - Jon
 - [ ]  api endpoint for single users items - Jon
-- [ ]  api post for users items if needed - Jon
+- [ ]  api post for users items if needed - Jon  
 - AFTER ALL ABOVE THINGS ARE DONE
 - [ ] add middle where to all files - Jon
 - [ ] add protected routes to all things that need it - Jon
