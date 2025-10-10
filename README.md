@@ -9,6 +9,18 @@ as well as routes to register and login.
 2. Change the database name from `foobar` in the `db:schema` script.
 3. Update the environment variables in `example.env` and rename the file to `.env`.
 
+## Time Frames For Our Backend
+
+1. Shema done 9/30/2025
+2. Seeding done 10/2/2025
+3. Querys done 10/10/2025
+4. Api endpoints done 10/14/2025
+5. Adding protected routes 10/23/2025
+6. Write script for our video 10/30/2025
+7. Film our video 11/4/2025
+8. Edit our video 10/6/2025
+9. Submit project 10/6/2025
+
 ## Project Board Assignments
  - PROJECT SCHEMA
 - [x] Tables built out in schema for our 9 tables that we currently support - Jon  
