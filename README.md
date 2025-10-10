@@ -10,9 +10,9 @@ as well as routes to register and login.
 3. Update the environment variables in `example.env` and rename the file to `.env`.
 
 ## Project Board Assignments
-PROJECT SCHEMA
+ - PROJECT SCHEMA
 - [x] Tables built out in schema for our 9 tables that we currently support - Jon
-PROJECT SEED FOLDER
+- PROJECT SEED FOLDER
 - [x] Json is added to the customer_category file -Jon
 - [ ] seed function is added to the customer_category file - Jon 
 - [x] Json is added to the customers file -Jon
@@ -31,7 +31,7 @@ PROJECT SEED FOLDER
 - [ ] seed function is added to the special_pricing file - Jon
 - [x] Json is added to the users file -Jon
 - [ ] seed function is added to the users file - Jon
-PROJECT QUERIES FOLDER
+- PROJECT QUERIES FOLDER
 - [ ] seed query wrtten for customer_category file - Jon
 - [ ] get all query written for the customer_category file - Jon
 - [ ] get specific items query written for the customer_category - Jon 
@@ -59,7 +59,7 @@ PROJECT QUERIES FOLDER
 - [x] seed query wrtten for users file - Jon
 - [x] get all query written for the users file - Jon
 - [x] get specific items query written for the users - Jon
-PROJECT API FOLDER
+- PROJECT API FOLDER
 - [ ]  api endpoint for all customer_category items - Jon
 - [ ]  api endpoint for single customer_category items - Jon
 - [ ]  api post for customer_category items if needed - Jon
@@ -87,6 +87,6 @@ PROJECT API FOLDER
 - [ ]  api endpoint for all users items - Jon
 - [ ]  api endpoint for single users items - Jon
 - [ ]  api post for users items if needed - Jon
-AFTER ALL ABOVE THINGS ARE DONE
+- AFTER ALL ABOVE THINGS ARE DONE
 - [ ] add middle where to all files - Jon
 - [ ] add protected routes to all things that need it - Jon
