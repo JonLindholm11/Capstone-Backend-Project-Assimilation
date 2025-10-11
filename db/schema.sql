@@ -31,10 +31,12 @@ CREATE TABLE price_categories(
 
 CREATE TABLE customers(
     id SERIAL PRIMARY KEY,
+    user_id int REFERENCES users(id) NOT NULL,
     company_name TEXT,
     contact_name TEXT,
     email TEXT NOT NULL,
-    assigned_salesman_id INT REFERENCES users(id) NOT NULL
+    assigned_salesman_id INT REFERENCES users(id),
+    account_status VARCHAR(20) DEFAULT "pending"
 );
 
 CREATE TABLE products(
