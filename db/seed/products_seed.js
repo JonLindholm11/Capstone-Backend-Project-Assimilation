@@ -84,7 +84,7 @@ async function seedProducts() {
       product_name: "Gwagen 63",
       product_category: "vehicles",
       product_description: "Geländewagen is a luxury SUV made by Mercedes-Benz",
-      basic_price: 199999,
+      basic_price: 199999.00,
       product_img:
         "https://images.pexels.com/photos/3457780/pexels-photo-3457780.jpeg",
     },
@@ -92,7 +92,7 @@ async function seedProducts() {
       product_name: "Toyota Land Cruiser",
       product_category: "vehicles",
       product_description: "Durable, and highly capable four-wheel-drive SUV",
-      basic_price: 87745,
+      basic_price: 87745.00,
       product_img:
         "https://images.pexels.com/photos/3879065/pexels-photo-3879065.jpeg",
     },
@@ -100,7 +100,7 @@ async function seedProducts() {
       product_name: "lamborghini murcielago",
       product_category: "vehicles",
       product_description: "Aggressive-looking, two-seater V12 supercar",
-      basic_price: 300000,
+      basic_price: 300000.00,
       product_img:
         "https://images.pexels.com/photos/3422964/pexels-photo-3422964.jpeg",
     },
@@ -109,7 +109,7 @@ async function seedProducts() {
       product_category: "vehicles",
       product_description:
         "Iconic sports car known for its performance and design",
-      basic_price: 251000,
+      basic_price: 251000.00,
       product_img:
         "https://images.pexels.com/photos/1972736/pexels-photo-1972736.jpeg",
     },
@@ -117,7 +117,7 @@ async function seedProducts() {
       product_name: "Jeep Wrangler",
       product_category: "vehicles",
       product_description: "Iconic off-road vehicle with rugged design",
-      basic_price: 102000,
+      basic_price: 102000.00,
       product_img:
         "https://images.pexels.com/photos/2882234/pexels-photo-2882234.jpeg",
     },
@@ -126,7 +126,7 @@ async function seedProducts() {
       product_category: "vehicles",
       product_description:
         "High-performance sports car with a powerful V10 engine",
-      basic_price: 161395,
+      basic_price: 161395.00,
       product_img:
         "https://images.pexels.com/photos/1545743/pexels-photo-1545743.jpeg",
     },
@@ -134,7 +134,7 @@ async function seedProducts() {
       product_name: "Ford Mustang",
       product_category: "vehicles",
       product_description: "Classic American muscle car with a powerful engine",
-      basic_price: 43000,
+      basic_price: 43000.00,
       product_img:
         "https://images.pexels.com/photos/1805053/pexels-photo-1805053.jpeg",
     },
@@ -239,7 +239,7 @@ async function seedProducts() {
       product_name: "skid steer ",
       product_category: "construction tools",
       product_description: " a front loading piece of equipment",
-      basic_price: 44995.0,
+      basic_price: 44995.00,
       product_img:
         "https://www.pexels.com/photo/skid-loader-on-a-baseball-field-25559744/",
     },
@@ -247,7 +247,7 @@ async function seedProducts() {
       product_name: "mini excavator",
       product_category: "construction tools",
       product_description: "a better shovel",
-      basic_price: 25000.0,
+      basic_price: 25000.00,
       product_img:
         "https://www.pexels.com/photo/mini-excavator-in-melbourne-public-parking-lot-31461653/",
     },
@@ -287,7 +287,7 @@ async function seedProducts() {
       product_name: "tacos",
       product_category: "food",
       product_description: "meat in tortilla ",
-      basic_price: 12.0,
+      basic_price: 12.00,
       product_img:
         "https://www.pexels.com/photo/cooked-food-on-blue-plate-2092507/",
     },
