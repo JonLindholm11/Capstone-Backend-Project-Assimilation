@@ -31,11 +31,12 @@ CREATE TABLE price_categories(
 
 CREATE TABLE customers(
     id SERIAL PRIMARY KEY,
+    user_id int REFERENCES users(id) NOT NULL,
     company_name TEXT,
     contact_name TEXT,
     email TEXT NOT NULL,
-    price_tier_id INT REFERENCES price_categories(id) NOT NULL,
-    assigned_salesman_id INT REFERENCES users(id) NOT NULL
+    assigned_salesman_id INT REFERENCES users(id),
+    account_status VARCHAR(20) DEFAULT "pending"
 );
 
 CREATE TABLE products(
@@ -45,6 +46,14 @@ CREATE TABLE products(
     product_description TEXT NOT NULL,
     basic_price DECIMAL(10, 2) NOT NULL,
     product_img VARCHAR(500) NOT NULL
+);
+
+CREATE TABLE customer_category_pricing(
+    id SERIAL PRIMARY KEY,
+    customer_id INT REFERENCES customers(id) NOT NULL,
+    product_category VARCHAR(100) NOT NULL,
+    price_tier_id INT REFERENCES price_categories(id) NOT NULL,
+    UNIQUE(customer_id, product_category)
 );
 
 CREATE TABLE special_pricing(
