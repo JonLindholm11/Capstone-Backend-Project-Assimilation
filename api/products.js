@@ -1,7 +1,7 @@
 import express from "express";
 import { getProducts } from "../db/queries/products.js";
 
-const router = express.router();
+const router = express.Router();
 export default router;
 
 router.route("/products").get(async (req, res) => {

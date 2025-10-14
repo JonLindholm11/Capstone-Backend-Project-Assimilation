@@ -52,7 +52,7 @@ export async function getProductsByCategory(product_category) {
     SELECT * FROM products
     WHERE product_category = $1
     `;
-  const { rows: products_category } = db.query(SQL, product_category);
+  const { rows: products_category } = await db.query(SQL, product_category);
   return products_category;
 }
 

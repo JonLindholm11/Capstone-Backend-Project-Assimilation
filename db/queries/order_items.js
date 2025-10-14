@@ -24,16 +24,31 @@ export async function createOrder_Items(
   return order_items;
 }
 
-export async function joinCustomer_id() {
-    const SQL = `
+export async function joinOrderItems() {
+  const SQL = `
     SELECT
-    customers.company_name,
-    customers.contact_name,
-    customers.email,
-    customers.price_tier_id,
-    customers.assigned_salesman_id,
-    
-    `
+      order_items.id,
+      order_items.order_id,
+      order_items.product_id,
+      order_items.quantity,
+      order_items.unit_price,
+      orders.id AS order_id,
+      orders.order_date,
+      orders.total_amount,
+      orders.order_status,
+      products.id AS product_id,
+      products.product_name,
+      products.product_category,
+      products.product_description,
+      products.basic_price,
+      products.product_img
+    FROM order_items
+    LEFT JOIN orders ON order_items.order_id = orders.id
+    LEFT JOIN products ON order_items.product_id = products.id
+  `;
+
+  const { rows: joinOrderItemsData } = await db.query(SQL);
+  return joinOrderItemsData;
 }
 
 export async function getOrder_Items(
@@ -63,7 +78,6 @@ export async function getOrder_ItemsByOrder_Id(order_id) {
   const SQL = `
     SELECT * FROM order_items
     WHERE order_id = $1
-    RETURNING *
     `;
   const { rows: order_id } = db.query(SQL, order_id);
   return order_id;
@@ -73,7 +87,6 @@ export async function getOrder_ItemsByProduct_Id(product_id) {
   const SQL = `
     SELECT * FROM order_items
     WHERE product_id = $1
-    RETURNING *
     `;
   const { rows: product_id } = db.query(SQL, product_id);
   return product_id;
@@ -83,7 +96,6 @@ export async function getOrder_ItemsByQuantity(quantity) {
   const SQL = `
     SELECT * FROM order_items
     WHERE quantity = $1
-    RETURNING *
     `;
   const { rows: quantity } = db.query(SQL, quantity);
   return quantity;
@@ -93,7 +105,6 @@ export async function getOrder_ItemsByUnit_Price(unit_price) {
   const SQL = `
     SELECT * FROM order_items
     WHERE unit_price = $1
-    RETURNING *
     `;
   const { rows: unit_price } = db.query(SQL, unit_price);
   return unit_price;
@@ -103,7 +114,6 @@ export async function getOrder_ItemsByTotal_Price(total_price) {
   const SQL = `
     SELECT * FROM order_items
     WHERE total_price = $1
-    RETURNING *
     `;
   const { rows: total_price } = db.query(SQL, total_price);
   return total_price;
@@ -113,7 +123,6 @@ export async function getOrder_ItemsById(id) {
   const SQL = `
     SELECT * FROM order_items
     WHERE id = $1
-    RETURNING *
     `;
   const { rows: id } = db.query(SQL, id);
   return id;

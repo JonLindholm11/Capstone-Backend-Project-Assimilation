@@ -26,6 +26,30 @@ export async function createOrders(
   return orders;
 }
 
+export async function getOrdersWithDetails() {
+  const SQL = `
+    SELECT
+      orders.id,
+      orders.order_date,
+      orders.total_amount,
+      orders.order_status,
+      orders.created_date,
+      customers.id AS customer_id,
+      customers.company_name,
+      customers.contact_name,
+      customers.email AS customer_email,
+      service_rep.id AS service_rep_id,
+      service_rep.email AS service_rep_email,
+      service_rep.role_id
+    FROM orders
+    LEFT JOIN customers ON orders.customer_id = customers.id
+    LEFT JOIN users AS service_rep ON orders.assigned_service_rep = service_rep.id
+  `;
+
+  const { rows } = await db.query(SQL);
+  return rows;
+}
+
 export async function getOrders(
   customer_id,
   order_date,

@@ -26,6 +26,32 @@ export async function createSpecial_Pricing(
   return special_pricing;
 }
 
+export async function getSpecialPricing() {
+  const SQL = `
+    SELECT
+      special_pricing.id,
+      special_pricing.special_price,
+      special_pricing.start_date,
+      special_pricing.end_date,
+      special_pricing.is_active,
+      products.id AS product_id,
+      products.product_name,
+      products.product_category,
+      products.product_description,
+      products.basic_price,
+      products.product_img,
+      created_by.id AS created_by_user_id,
+      created_by.email AS created_by_email,
+      created_by.role_id
+    FROM special_pricing
+    LEFT JOIN products ON special_pricing.product_id = products.id
+    LEFT JOIN users AS created_by ON special_pricing.created_by_user_id = created_by.id
+  `;
+
+  const { rows : joinSpecialPricing } = await db.query(SQL);
+  return joinSpecialPricing;
+}
+
 export async function getSpecial_Pricing(
   product_id,
   special_price,

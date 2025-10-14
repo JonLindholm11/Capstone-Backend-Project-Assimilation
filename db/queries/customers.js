@@ -24,23 +24,7 @@ export async function createCustomers(
   return customers;
 }
 
-export async function leftJoinAssigned_Salesman_Id() {
-  const SQL = `
-     SELECT
-     customers.id,
-     customers.company_name,
-     customers.contact_name,
-     customers.assigned_salesman_id,
-     users.id AS salesman_id,
-     users.email AS salesman_email
-     FROM customers
-     LEFT JOIN users ON customers.assigned_salesman_id = users.id
-    `;
-  const { rows: assignSalesman } = await db.query(SQL);
-  return assignSalesman;
-}
-
-export async function joinUser_IdWithCustomers() {
+export async function joinCustomersWithUsers() {
   const SQL = `
     SELECT
       customers.id,
@@ -49,15 +33,19 @@ export async function joinUser_IdWithCustomers() {
       customers.email,
       customers.account_status,
       customers.assigned_salesman_id,
-      users.id AS user_id,
-      users.email AS user_email,
-      users.role_id
+      customers.user_id,
+      user_account.id AS user_id,
+      user_account.email AS user_email,
+      user_account.role_id,
+      salesman.id AS salesman_id,
+      salesman.email AS salesman_email
     FROM customers
-    LEFT JOIN users ON customers.user_id = users.id
+    LEFT JOIN users AS user_account ON customers.user_id = user_account.id
+    LEFT JOIN users AS salesman ON customers.assigned_salesman_id = salesman.id
   `;
 
-  const { rows: joinUser_Id } = await db.query(SQL);
-  return joinUser_Id;
+  const { rows: customersWithUsers } = await db.query(SQL);
+  return customersWithUsers;
 }
 
 export async function getCustomerByUser_Id(user_id) {

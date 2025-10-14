@@ -55,6 +55,7 @@ CREATE TABLE customer_category_pricing(
     price_tier_id INT REFERENCES price_categories(id) NOT NULL,
     UNIQUE(customer_id, product_category)
 );
+
 CREATE TABLE special_pricing(
     id SERIAL PRIMARY KEY,
     product_id INT REFERENCES products(id) NOT NULL,
