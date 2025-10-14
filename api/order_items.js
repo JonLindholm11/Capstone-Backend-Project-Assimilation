@@ -1,5 +1,5 @@
 import express from "express";
-import { getOrder_Items, getOrder_ItemsById } from "../db/queries/orders.js";
+import { getOrder_Items, getOrder_ItemsById } from "../db/queries/orders_items.js";
 
 const router = express.Router();
 export default router;
