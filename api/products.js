@@ -13,3 +13,7 @@ router.route("/products/:id").get(async (req, res) => {
   const productsById = await getProductsById(req.products.id);
   res.send(productsById);
 });
+
+router.route("/products/category").get(async (req,res) => {
+    const productsByCategory = await getProductsById(req.products.category_category)
+})
