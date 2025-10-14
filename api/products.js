@@ -1,10 +1,15 @@
 import express from "express";
-import { getProducts } from "../db/queries/products.js";
+import { getProducts, getProductsById } from "../db/queries/products.js";
 
 const router = express.Router();
 export default router;
 
 router.route("/products").get(async (req, res) => {
-  const products = await getProducts();
+  const products = await getProducts(req.products);
   res.send(products);
+});
+
+router.route("/products/:id").get(async (req, res) => {
+  const productsById = await getProductsById(req.products.id);
+  res.send(productsById);
 });
