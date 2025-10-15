@@ -1,11 +1,6 @@
-import db from "../client.js";
+import { createCustomers } from "#db/queries/customers";
 
-await db.connect();
-await seedCustomers();
-await db.end();
-console.log("🌱 Customers seeded.");
-
-async function seedCustomers() {
+export async function seedCustomers() {
   const customers = [
     {
       user_id: 4,
@@ -13,7 +8,7 @@ async function seedCustomers() {
       contact_name: null,
       email: "customertest_1@email.com",
       assigned_salesman_id: 1,
-      account_status : "active"
+      account_status: "active",
     },
     {
       user_id: 4,
@@ -21,7 +16,7 @@ async function seedCustomers() {
       contact_name: "test2",
       email: "customertest_2@email.com",
       assigned_salesman_id: 1,
-      account_status : "active"
+      account_status: "active",
     },
     {
       user_id: 4,
@@ -29,7 +24,7 @@ async function seedCustomers() {
       contact_name: "test3",
       email: "customertest_3@email.com",
       assigned_salesman_id: null,
-      account_status : "pending"
+      account_status: "pending",
     },
     {
       user_id: 4,
@@ -37,8 +32,11 @@ async function seedCustomers() {
       contact_name: null,
       email: "customertest_4@email.com",
       assigned_salesman_id: null,
-      account_status: "pending"
+      account_status: "pending",
     },
   ];
-  return customers;
+  for (const customer of customers) {
+    await createCustomers(customer);
+  }
+  console.log("completed seeding customers");
 }

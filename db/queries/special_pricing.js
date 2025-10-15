@@ -1,29 +1,28 @@
 import db from "#db/client";
 
-export async function createSpecial_Pricing(
+export async function createSpecial_Pricing({
   product_id,
   special_price,
   start_date,
   end_date,
   is_active,
   created_by_user_id
-) {
+}) {
   const SQL = `
     INSERT INTO special_pricing
     (product_id, special_price, start_date, end_date, is_active, created_by_user_id)
     VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *
     `;
-  const { rows: special_pricing } = db.query(
-    SQL,
-    (product_id,
+  const { rows } = await db.query(SQL, [
+    product_id,
     special_price,
     start_date,
     end_date,
     is_active,
-    created_by_user_id)
-  );
-  return special_pricing;
+    created_by_user_id
+  ]);
+  return rows[0];
 }
 
 export async function getSpecialPricing() {
@@ -62,27 +61,26 @@ export async function getSpecial_Pricing(
 ) {
   const SQL = `
     SELECT * FROM special_pricing
-    WHERE product_id, special_price, start_date, end_date, is_active, created_by_user_id = $1, $2, $3, $4, $5, $6
+    WHERE product_id = $1 AND special_price = $2 AND start_date = $3 AND end_date = $4 AND is_active = $5 AND created_by_user_id = $6
     `;
-  const { rows: special_pricing } = db.query(
-    SQL,
+  const { rows } = await db.query(SQL, [
     product_id,
     special_price,
     start_date,
     end_date,
     is_active,
     created_by_user_id
-  );
-  return special_pricing;
+  ]);
+  return rows;
 }
 
 export async function getSpecial_PricingBySpecial_Price(special_price) {
   const SQL = `
-    SELECT * FROM special_price
+    SELECT * FROM special_pricing
     WHERE special_price = $1
     `;
-  const { rows: special_price } = db.query(SQL, special_price);
-  return special_price;
+  const { rows } = await db.query(SQL, [special_price]);
+  return rows;
 }
 
 export async function getSpecial_PricingByStart_DateAndEndDate(
@@ -90,29 +88,29 @@ export async function getSpecial_PricingByStart_DateAndEndDate(
   end_date
 ) {
   const SQL = `
-    SELECT * FROM special_price
-    WHERE start_date, end_date = $1, $2
+    SELECT * FROM special_pricing
+    WHERE start_date = $1 AND end_date = $2
     `;
-  const { rows: startEndDate } = db.query(SQL, start_date, end_date);
-  return startEndDate;
+  const { rows } = await db.query(SQL, [start_date, end_date]);
+  return rows;
 }
 
 export async function getSpecial_PricingByIs_Active(is_active) {
   const SQL = `
-    SELECT * FROM special_price
+    SELECT * FROM special_pricing
     WHERE is_active = $1
     `;
-  const { rows: is_active } = db.query(SQL, is_active);
-  return is_active;
+  const { rows } = await db.query(SQL, [is_active]);
+  return rows;
 }
 
 export async function getSpecial_PricingByCreatedByUserId(created_by_user_id) {
   const SQL = `
-    SELECT * FROM special_price
+    SELECT * FROM special_pricing
     WHERE created_by_user_id = $1
     `;
-  const { rows: created_by_user } = db.query(SQL, created_by_user_id);
-  return created_by_user;
+  const { rows } = await db.query(SQL, [created_by_user_id]);
+  return rows;
 }
 
 export async function getSpecial_PricingById(id) {
@@ -120,6 +118,6 @@ export async function getSpecial_PricingById(id) {
     SELECT * FROM special_pricing
     WHERE id = $1
     `;
-  const { rows: id } = db.query(SQL, id);
-  return id;
+  const { rows } = await db.query(SQL, [id]);
+  return rows;
 }

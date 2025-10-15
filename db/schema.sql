@@ -1,11 +1,12 @@
-DROP TABLE IF EXISTS order_items;
-DROP TABLE IF EXISTS orders;
-DROP TABLE IF EXISTS special_pricing;
-DROP TABLE IF EXISTS customers;
-DROP TABLE IF EXISTS products;
-DROP TABLE IF EXISTS price_categories;
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS order_items CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS special_pricing CASCADE;
+DROP TABLE IF EXISTS customers CASCADE;
+DROP TABLE IF EXISTS products CASCADE;
+DROP TABLE IF EXISTS price_categories CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS roles CASCADE;
+DROP TABLE IF EXISTS customer_category_pricing CASCADE;
 
 CREATE TABLE roles(
     id SERIAL PRIMARY KEY,
@@ -36,7 +37,7 @@ CREATE TABLE customers(
     contact_name TEXT,
     email TEXT NOT NULL,
     assigned_salesman_id INT REFERENCES users(id),
-    account_status VARCHAR(20) DEFAULT "pending"
+    account_status VARCHAR(20) DEFAULT 'pending'
 );
 
 CREATE TABLE products(

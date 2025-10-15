@@ -1,11 +1,11 @@
 import db from "#db/client";
 
-export async function createPriceCategories(
+export async function createPriceCategories({
   category_name,
   category_description,
   discount_percentage,
   tier_level
-) {
+}) {
   const SQL = `
     INSERT INTO price_categories (category_name, category_description, discount_percentage, tier_level)
     VALUES ($1, $2, $3, $4)
@@ -26,16 +26,14 @@ export async function getPriceCategoryByDiscountPercentage(
   const SQL = `
     SELECT * FROM price_categories WHERE discount_percentage = $1
     `;
-  const { rows: discount_percentage } = await db.query(SQL, [
-    discount_percentage,
-  ]);
-  return discount_percentage;
+  const { rows: dp } = await db.query(SQL, [discount_percentage]);
+  return dp;
 }
 
 export async function getPriceCategoryById(id) {
   const SQL = `
     SELECT * FROM price_categories WHERE discount_percentage = $1
     `;
-  const { rows: id } = db.query(SQL, [id]);
-  return id;
+  const { rows: pid } = db.query(SQL, [id]);
+  return pid;
 }

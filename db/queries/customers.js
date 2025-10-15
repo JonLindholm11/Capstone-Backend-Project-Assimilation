@@ -1,13 +1,13 @@
 import db from "#db/client";
 
-export async function createCustomers(
+export async function createCustomers({
   user_id,
   company_name,
   contact_name,
   email,
   assigned_salesman_id,
   account_status
-) {
+}) {
   const SQL = `
     INSERT INTO customers (user_id, company_name, contact_name, email, assigned_salesman_id, account_status)
     VALUES ($1, $2, $3, $4, $5, $6)
