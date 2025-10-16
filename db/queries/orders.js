@@ -9,19 +9,19 @@ export async function createOrders({
   created_date
 }) {
   const SQL = `
-    INSET INTO orders
+    INSERT INTO orders
     (customer_id, order_date, total_amount, order_status, assigned_service_rep, created_date)
     VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *
     `;
   const { rows: orders } = await db.query(
     SQL,
-    customer_id,
+    [customer_id,
     order_date,
     total_amount,
     order_status,
     assigned_service_rep,
-    created_date
+    created_date]
   );
   return orders;
 }

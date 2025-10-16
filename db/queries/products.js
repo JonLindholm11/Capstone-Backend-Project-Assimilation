@@ -5,7 +5,7 @@ export async function createProducts({
   product_category,
   product_description,
   basic_price,
-  product_img
+  product_img,
 }) {
   const SQL = `
     INSERT INTO products
@@ -14,15 +14,15 @@ export async function createProducts({
         ($1, $2, $3, $4, $5)
     RETURNING *
     `;
-  const { rows: products } = await db.query(
+  const { rows } = await db.query(
     SQL,
-    (product_name,
+    [product_name,
     product_category,
     product_description,
     basic_price,
-    product_img)
+    product_img]
   );
-  return products;
+  return rows;
 }
 
 export async function getProducts(

@@ -18,7 +18,7 @@ CREATE TABLE roles(
 CREATE TABLE users(
     id SERIAL PRIMARY KEY,
     email TEXT UNIQUE NOT NULL,
-    password_hash TEXT NOT NULL,
+    password TEXT NOT NULL,
     role_id INT DEFAULT 4 REFERENCES roles(id) NOT NULL
 );
 
@@ -83,6 +83,5 @@ CREATE TABLE order_items(
     product_id INT REFERENCES products(id) NOT NULL,
     quantity INT NOT NULL,
     unit_price DECIMAL(10, 2) NOT NULL,
-    total_price DECIMAL(20, 2) NOT NULL,
-    applied_discount_percentage DECIMAL(5,2) NOT NULL
+    total_price DECIMAL(20, 2) NOT NULL
 );

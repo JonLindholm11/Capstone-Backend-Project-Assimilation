@@ -15,11 +15,11 @@ export async function createOrder_Items({
     `;
   const { rows: order_items } = await db.query(
     SQL,
-    order_id,
+    [order_id,
     product_id,
     quantity,
     unit_price,
-    total_price
+    total_price]
   );
   return order_items;
 }

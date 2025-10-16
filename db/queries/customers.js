@@ -6,7 +6,7 @@ export async function createCustomers({
   contact_name,
   email,
   assigned_salesman_id,
-  account_status
+  account_status,
 }) {
   const SQL = `
     INSERT INTO customers (user_id, company_name, contact_name, email, assigned_salesman_id, account_status)
@@ -46,6 +46,34 @@ export async function joinCustomersWithUsers() {
 
   const { rows: customersWithUsers } = await db.query(SQL);
   return customersWithUsers;
+}
+
+export async function getCustomers(
+  user_id,
+  company_name,
+  contact_name,
+  email,
+  assigned_salesman_id,
+  account_status
+) {
+  const SQL = `
+   SELECT * FROM customers WHERE 
+   user_id = $1 AND
+   company_name = $2 AND
+   contact_name = $3 AND
+   email = $4 AND
+   assigned_salesman_id = $5 AND
+   account_status = $6
+  `;
+  const { rows } = await db.query(SQL, [
+    user_id,
+    company_name,
+    contact_name,
+    email,
+    assigned_salesman_id,
+    account_status,
+  ]);
+  return rows;
 }
 
 export async function getCustomerByUser_Id(user_id) {
