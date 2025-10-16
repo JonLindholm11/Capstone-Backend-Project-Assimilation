@@ -1,26 +1,21 @@
 import db from "#db/client";
 
-export async function createCustomer_Category_Pricing(
+export async function createCustomer_Category_Pricing({
   customer_id,
   product_category,
   price_tier_id
-) {
+}) {
   const SQL = `
     INSERT INTO customer_category_pricing
     (customer_id, product_category, price_tier_id)
     VALUES ($1, $2, $3)
     RETURNING *
     `;
-  const { rows: customer_pricing } = await db.query(
-    SQL,
-    customer_id,
-    product_category,
-    price_tier_id
-  );
-  return customer_pricing;
+  const { rows } = await db.query(SQL, [customer_id, product_category, price_tier_id]);
+  return rows[0];
 }
 
-export async function getCustomerCategoryPricing() {
+export async function joinCustomerCategoryPricing() {
   const SQL = `
     SELECT
       ccp.id,

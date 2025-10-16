@@ -1,11 +1,6 @@
-import db from "../client.js";
+import { createPriceCategories } from "#db/queries/price_categories";
 
-await db.connect();
-await seedPrice_Categories();
-await db.end();
-console.log("🌱 Price Categories seeded.");
-
-async function seedPrice_Categories() {
+export async function seedPrice_Categories() {
   const price_categories = [
     {
       category_name: "standard",
@@ -35,5 +30,8 @@ async function seedPrice_Categories() {
       tier_level: 4,
     },
   ];
-  return price_categories;
+  for (const price_category of price_categories) {
+      await createPriceCategories(price_category);
+    }
+    console.log("completed seeding price categories");
 }

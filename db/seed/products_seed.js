@@ -1,11 +1,6 @@
-import db from "../client.js";
+import { createProducts } from "#db/queries/products";
 
-await db.connect();
-await seedProducts();
-await db.end();
-console.log("🌱 Products seeded.");
-
-async function seedProducts() {
+export async function seedProducts() {
   const products = [
     {
       product_name: "Camera",
@@ -324,5 +319,8 @@ async function seedProducts() {
         "https://images.pexels.com/photos/6944172/pexels-photo-6944172.jpeg",
     },
   ];
-  return products;
+  for (const product of products) {
+      await createProducts(product);
+    }
+    console.log("completed seeding products");
 }

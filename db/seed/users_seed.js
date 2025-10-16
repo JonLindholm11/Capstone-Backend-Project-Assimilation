@@ -1,11 +1,6 @@
-import db from "../client.js";
+import { createUser } from "#db/queries/users";
 
-await db.connect();
-await seedUsers();
-await db.end();
-console.log("🌱 Users seeded.");
-
-async function seedUsers() {
+export async function seedUsers() {
   const users = [
     {
       email: "admin@projectname.com",
@@ -28,5 +23,8 @@ async function seedUsers() {
       role_id: 4,
     },
   ];
-  return users;
+  for (const user of users) {
+      await createUser(user);
+    }
+    console.log("completed seeding user");
 }

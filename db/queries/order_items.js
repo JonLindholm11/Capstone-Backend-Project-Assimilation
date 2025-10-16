@@ -1,19 +1,19 @@
 import db from "#db/client";
 
-export async function createOrder_Items(
+export async function createOrder_Items({
   order_id,
   product_id,
   quantity,
   unit_price,
   total_price
-) {
+}) {
   const SQL = `
     INSERT INTO order_items
     (order_id, product_id, quantity, unit_price, total_price)
     VALUES ($1, $2, $3, $4, $5)
     RETURNING *
     `;
-  const { rows: order_items } = db.query(
+  const { rows: order_items } = await db.query(
     SQL,
     order_id,
     product_id,
@@ -63,7 +63,7 @@ export async function getOrder_Items(
     WHERE order_id, product_id, quantity, unit_price, total_price = $1, $2, $3, $4, $5
     RETURNING *
     `;
-  const { rows: order_items } = db.query(
+  const { rows: order_items } = await db.query(
     SQL,
     order_id,
     product_id,
@@ -71,7 +71,7 @@ export async function getOrder_Items(
     unit_price,
     total_price
   );
-  return order_id;
+  return order_items;
 }
 
 export async function getOrder_ItemsByOrder_Id(order_id) {
@@ -79,8 +79,8 @@ export async function getOrder_ItemsByOrder_Id(order_id) {
     SELECT * FROM order_items
     WHERE order_id = $1
     `;
-  const { rows: order_id } = db.query(SQL, order_id);
-  return order_id;
+  const { rows: oi } = await db.query(SQL, order_id);
+  return oi;
 }
 
 export async function getOrder_ItemsByProduct_Id(product_id) {
@@ -88,8 +88,8 @@ export async function getOrder_ItemsByProduct_Id(product_id) {
     SELECT * FROM order_items
     WHERE product_id = $1
     `;
-  const { rows: product_id } = db.query(SQL, product_id);
-  return product_id;
+  const { rows: pi } = await db.query(SQL, product_id);
+  return pi;
 }
 
 export async function getOrder_ItemsByQuantity(quantity) {
@@ -97,8 +97,8 @@ export async function getOrder_ItemsByQuantity(quantity) {
     SELECT * FROM order_items
     WHERE quantity = $1
     `;
-  const { rows: quantity } = db.query(SQL, quantity);
-  return quantity;
+  const { rows: qty } = await db.query(SQL, quantity);
+  return qty;
 }
 
 export async function getOrder_ItemsByUnit_Price(unit_price) {
@@ -106,8 +106,8 @@ export async function getOrder_ItemsByUnit_Price(unit_price) {
     SELECT * FROM order_items
     WHERE unit_price = $1
     `;
-  const { rows: unit_price } = db.query(SQL, unit_price);
-  return unit_price;
+  const { rows: up } = await db.query(SQL, unit_price);
+  return up;
 }
 
 export async function getOrder_ItemsByTotal_Price(total_price) {
@@ -115,8 +115,8 @@ export async function getOrder_ItemsByTotal_Price(total_price) {
     SELECT * FROM order_items
     WHERE total_price = $1
     `;
-  const { rows: total_price } = db.query(SQL, total_price);
-  return total_price;
+  const { rows: tp } = await db.query(SQL, total_price);
+  return tp;
 }
 
 export async function getOrder_ItemsById(id) {
@@ -124,6 +124,6 @@ export async function getOrder_ItemsById(id) {
     SELECT * FROM order_items
     WHERE id = $1
     `;
-  const { rows: id } = db.query(SQL, id);
-  return id;
+  const { rows: oiid } = await db.query(SQL, id);
+  return oiid;
 }

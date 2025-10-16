@@ -1,11 +1,6 @@
-import db from "../client.js";
+import { createRoles } from "#db/queries/roles";
 
-await db.connect();
-await seedRoles();
-await db.end();
-console.log("🌱 Roles seeded.");
-
-async function seedRoles() {
+export async function seedRoles() {
   const roles = [
     {
       role_name: "Admin",
@@ -29,5 +24,8 @@ async function seedRoles() {
       role_level: 4,
     },
   ];
-  return roles;
+  for (const role of roles) {
+    await createRoles(role);
+  }
+  console.log("completed seeding roles");
 }

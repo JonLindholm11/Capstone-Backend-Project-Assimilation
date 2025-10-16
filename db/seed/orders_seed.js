@@ -1,11 +1,6 @@
-import db from "../client.js";
+import { createOrders } from "#db/queries/orders";
 
-await db.connect();
-await seedOrders();
-await db.end();
-console.log("🌱 Orders seeded.");
-
-async function seedOrders() {
+export async function seedOrders() {
   const orders = [
     {
       customer_id: 1,
@@ -32,5 +27,8 @@ async function seedOrders() {
       created_date: "2025-10-07",
     },
   ];
-  return orders;
+  for (const order of orders) {
+      await createOrders(order);
+    }
+    console.log("completed seeding orders");
 }
