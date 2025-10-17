@@ -25,26 +25,12 @@ export async function createProducts({
   return rows;
 }
 
-export async function getProducts(
-  product_name,
-  product_category,
-  product_description,
-  basic_price,
-  product_img
-) {
+export async function getProducts() {
   const SQL = `
     SELECT * FROM products
-    WHERE product_name, product_category, product_description, basic_price, product_img = $1, $2, $3, $4, $5
     `;
-  const { rows: products } = db.query(
-    SQL,
-    (product_name,
-    product_category,
-    product_description,
-    basic_price,
-    product_img)
-  );
-  return products;
+  const { rows } = await db.query(SQL);
+  return rows;
 }
 
 export async function getProductsByCategory(product_category) {
@@ -97,6 +83,6 @@ export async function getProductsById(id) {
     SELECT * FROM products
     WHERE id = $1
     `;
-  const { rows: pi } = db.query(SQL, id);
+  const { rows: pi } = await db.query(SQL, [id]);
   return pi;
 }

@@ -50,28 +50,11 @@ export async function getOrdersWithDetails() {
   return rows;
 }
 
-export async function getOrders(
-  customer_id,
-  order_date,
-  total_amount,
-  order_status,
-  assigned_service_rep,
-  created_date
-) {
+export async function getOrders() {
   const SQL = `
     SELECT * FROM orders
-    WHERE customer_id, order_date, total_amount, order_status, assigned_service_rep, created_date =
-    $1, $2, $3, $4, $5, $6
     `;
-  const { rows: orders } = await db.query(
-    SQL,
-    customer_id,
-    order_date,
-    total_amount,
-    order_status,
-    assigned_service_rep,
-    created_date
-  );
+  const { rows: orders } = await db.query(SQL);
   return orders;
 }
 
@@ -134,6 +117,6 @@ export async function getOrdersById(id) {
     SELECT * FROM orders
     WHERE id = $1
     `;
-  const { rows: oid } = await db.query(SQL, id);
+  const { rows: oid } = await db.query(SQL, [id]);
   return oid;
 }
