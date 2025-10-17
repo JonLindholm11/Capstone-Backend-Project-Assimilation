@@ -48,31 +48,9 @@ export async function joinCustomersWithUsers() {
   return customersWithUsers;
 }
 
-export async function getCustomers(
-  user_id,
-  company_name,
-  contact_name,
-  email,
-  assigned_salesman_id,
-  account_status
-) {
-  const SQL = `
-   SELECT * FROM customers WHERE 
-   user_id = $1 AND
-   company_name = $2 AND
-   contact_name = $3 AND
-   email = $4 AND
-   assigned_salesman_id = $5 AND
-   account_status = $6
-  `;
-  const { rows } = await db.query(SQL, [
-    user_id,
-    company_name,
-    contact_name,
-    email,
-    assigned_salesman_id,
-    account_status,
-  ]);
+export async function getCustomers() {
+  const SQL = `SELECT * FROM customers`;
+  const { rows } = await db.query(SQL);
   return rows;
 }
 
@@ -108,6 +86,14 @@ export async function getCustomerByAssigned_Salesman_Id(assigned_salesman_id) {
     assigned_salesman_id,
   ]);
   return customer_salesman;
+}
+
+export async function getCustomersById(id) {
+  const SQL = `
+    SELECT * FROM customers WHERE id = $1
+  `;
+  const { rows } = await db.query(SQL, [id]);
+  return rows;
 }
 
 export async function getCustomerByAccountStatus() {

@@ -51,26 +51,11 @@ export async function joinOrderItems() {
   return joinOrderItemsData;
 }
 
-export async function getOrder_Items(
-  order_id,
-  product_id,
-  quantity,
-  unit_price,
-  total_price
-) {
+export async function getOrder_Items() {
   const SQL = `
     SELECT * FROM order_items
-    WHERE order_id, product_id, quantity, unit_price, total_price = $1, $2, $3, $4, $5
-    RETURNING *
     `;
-  const { rows: order_items } = await db.query(
-    SQL,
-    order_id,
-    product_id,
-    quantity,
-    unit_price,
-    total_price
-  );
+  const { rows: order_items } = await db.query(SQL)
   return order_items;
 }
 
@@ -124,6 +109,6 @@ export async function getOrder_ItemsById(id) {
     SELECT * FROM order_items
     WHERE id = $1
     `;
-  const { rows: oiid } = await db.query(SQL, id);
+  const { rows: oiid } = await db.query(SQL, [id]);
   return oiid;
 }
