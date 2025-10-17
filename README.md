@@ -21,6 +21,28 @@ as well as routes to register and login.
 8. Edit our video 10/6/2025
 9. Submit project 10/6/2025
 
+## API Endpoint
+
+- Customers
+  get all customers = http://localhost:3000/customers
+  get customer by id = http://localhost:3000/customers/:id
+- Order Items
+  get all order items = http://localhost:3000/order_items
+  get order items by id = http://localhost:3000/order_items/:id
+- Orders
+  get all orders = http://localhost:3000/orders
+  get orders by id = http://localhost:3000/orders/:id
+- Products
+  get all products = http://localhost:3000/products
+  get products by id = http://localhost:3000/products/:id
+  get products by category = http://localhost:3000/products/category
+- Special Pricing
+  get all special prices = http://localhost:3000/special_pricing
+  get special price by id = http://localhost:3000/special_pricing/:id
+- Users
+  register = http://localhost:3000/register
+  login = http://localhost:3000/login
+
 ## Project Board Assignments
  - PROJECT SCHEMA
 - [x] Tables built out in schema for our 9 tables that we currently support - Jon  
