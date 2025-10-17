@@ -6,10 +6,10 @@ export default router;
 
 router.route("/customers").get(async (req, res) => {
   const customers = await getCustomers();
-  res.send(customers);
+  res.json(customers);
 });
 
 router.route("/customers/:id").get(async (req, res) => {
-  const customersById = await getCustomersById(req.customers.id);
+  const customersById = await getCustomersById(req.params.id);
   res.send(customersById);
 });
