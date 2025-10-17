@@ -9,8 +9,6 @@ export async function seedSpecial_Pricing() {
     is_active: true,
     created_by_user_id: 1,
   };
-  for (const special_price of specialPricing) {
-    await createSpecial_Pricing(special_price);
-  }
+  await createSpecial_Pricing(specialPricing);
   console.log("completed seeding special pricing");
 }

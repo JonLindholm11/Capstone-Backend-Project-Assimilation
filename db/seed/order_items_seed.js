@@ -27,7 +27,7 @@ export async function seedOrder_Items() {
       total_price: 14.99,
     },
   ];
-  for (const orderItem of orderItems) {
+  for (const orderItem of order_items) {
     await createOrder_Items(orderItem);
   }
   console.log("completed seeding order items");

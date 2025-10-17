@@ -5,7 +5,7 @@ const router = express.Router();
 export default router;
 
 router.route("/customers").get(async (req, res) => {
-  const customers = await getCustomers(req.customers);
+  const customers = await getCustomers();
   res.send(customers);
 });
 
