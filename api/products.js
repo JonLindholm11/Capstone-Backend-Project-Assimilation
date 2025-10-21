@@ -1,5 +1,9 @@
 import express from "express";
-import { getProducts, getProductsById } from "../db/queries/products.js";
+import {
+  getProducts,
+  getProductsByCategory,
+  getProductsById,
+} from "../db/queries/products.js";
 
 const router = express.Router();
 export default router;
@@ -9,12 +13,14 @@ router.route("/products").get(async (req, res) => {
   res.send(products);
 });
 
+router.route("/products/:category").get(async (req, res) => {
+  const productsByCategory = await getProductsByCategory(
+    req.params.category
+  );
+  res.send(productsByCategory);
+});
+
 router.route("/products/:id").get(async (req, res) => {
   const productsById = await getProductsById(req.params.id);
   res.send(productsById);
 });
-
-router.route("/products/category").get(async (req,res) => {
-    const productsByCategory = await getProductsById(req.params.category_category)
-    res.send(productsByCategory)
-})
