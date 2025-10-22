@@ -13,7 +13,7 @@ router.route("/products").get(async (req, res) => {
   res.send(products);
 });
 
-router.route("/products/:category").get(async (req, res) => {
+router.route("/products/category/:category").get(async (req, res) => {
   const productsByCategory = await getProductsByCategory(
     req.params.category
   );

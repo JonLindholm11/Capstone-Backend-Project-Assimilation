@@ -27,7 +27,7 @@ export async function getUserByUsernameAndPassword(email, password) {
   } = await db.query(sql, [email]);
   if (!user) return null;
 
-  const isValid = await bcrypt.compare(password, user.password_hash);
+  const isValid = await bcrypt.compare(password, user.password);
   if (!isValid) return null;
 
   return user;

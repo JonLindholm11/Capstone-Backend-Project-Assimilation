@@ -1,3 +1,4 @@
+import { getOrder_Items } from "#db/queries/order_items";
 import { createUser } from "#db/queries/users";
 
 export async function seedUsers() {
@@ -28,3 +29,4 @@ export async function seedUsers() {
     }
     console.log("completed seeding user");
 }
+
