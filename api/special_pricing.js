@@ -1,10 +1,9 @@
 import express from "express";
-import { getSpecial_Pricing } from "../db/queries/special_pricing.js";
-import { 
-  getSpecial_Pricing, 
+import {
+  getSpecial_Pricing,
   createSpecial_Pricing,
   updateSpecialPricing,
-  deleteSpecialPricing 
+  deleteSpecialPricing,
 } from "../db/queries/special_pricing.js";
 
 // Then your POST route uses createSpecial_Pricing (line 20)
