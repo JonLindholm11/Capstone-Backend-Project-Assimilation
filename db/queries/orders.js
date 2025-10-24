@@ -120,38 +120,3 @@ export async function getOrdersById(id) {
   const { rows: oid } = await db.query(SQL, [id]);
   return oid;
 }
-
-// Jodson - added functions for creating, updating, and deleting orders for admin panel
-
-export async function updateOrder(orderId, orderData) {
-  const SQL = `
-    UPDATE orders 
-    SET 
-      customer_id = $1,
-      order_date = $2,
-      total_amount = $3,
-      order_status = $4,
-      assigned_service_rep = $5
-    WHERE id = $6
-    RETURNING *
-  `;
-  const { rows } = await db.query(SQL, [
-    orderData.customer_id,
-    orderData.order_date,
-    orderData.total_amount,
-    orderData.order_status,
-    orderData.assigned_service_rep,
-    orderId
-  ]);
-  return rows[0];
-}
-
-export async function deleteOrder(orderId) {
-  const SQL = `
-    DELETE FROM orders 
-    WHERE id = $1 
-    RETURNING *
-  `;
-  const { rows } = await db.query(SQL, [orderId]);
-  return rows[0];
-}
