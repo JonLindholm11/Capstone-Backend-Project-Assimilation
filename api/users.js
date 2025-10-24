@@ -15,6 +15,8 @@ import {
 } from "#db/queries/users";
 import requireBody from "#middleware/requireBody";
 import { createToken } from "#utils/jwt";
+import { requireAuth } from "#middleware/requireAuth";
+import { requireRole } from "#middleware/requireRole";
 
 // Jodson - added role_id to user registration for role-based access control/ middleware that validates the request before it reaches your code.
 router
@@ -28,19 +30,52 @@ router
       role_id: role_id //Jodson - Reason for role_id addition: To assign roles during user registration
     });
 
-    const token = await createToken({ id: user.id, role_id : user.role_id });
-    res.status(201).send(token);
+    const token = await createToken({ id: user.id, role_id: user.role_id });
+    res.status(201).json({ token });
   });
 
 router
-  .route("/login")
-  .post(requireBody(["username", "password"]), async (req, res) => {
-    const { username, password } = req.body;
-    const user = await getUserByUsernameAndPassword(username, password);
-    if (!user) return res.status(401).send("Invalid username or password.");
+  .route("/register/admin")
+  .post(
+    requireAuth,
+    requireRole([1]),
+    requireBody(["email", "password", "role_id"]),
+    async (req, res) => {
+      const { email, password, role_id } = req.body;
 
-    const token = await createToken({ id: user.id, role_id : user.role_id });
-    res.send(token);
+      if (!Number.isInteger(role_id) || role_id < 1 || role_id > 4) {
+        return res.status(400).json({
+          error: "Invalid role_id",
+          message: "role_id must be an integer between 1 and 4",
+        });
+      }
+
+      const user = await createUser({ email, password, role_id });
+
+      res.status(201).json({
+        message: "User created successfully",
+        user: {
+          id: user.id,
+          email: user.email,
+          role_id: user.role_id,
+        },
+      });
+    }
+  );
+
+router
+  .route("/login")
+  .post(requireBody(["email", "password"]), async (req, res) => {
+    const { email, password } = req.body;
+    const user = await getUserByUsernameAndPassword(email, password);
+    if (!user)
+      return res.status(401).json({
+        error: "Invalid credentials",
+        message: "Invalid email or password",
+      });
+
+    const token = await createToken({ id: user.id, role_id: user.role_id });
+    res.json({ token });
   });
 
   // Get all users - for admin panel
