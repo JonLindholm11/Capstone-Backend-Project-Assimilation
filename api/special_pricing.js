@@ -1,14 +1,8 @@
 import express from "express";
-import {
-  getSpecial_Pricing,
-  createSpecial_Pricing,
-  updateSpecialPricing,
-  deleteSpecialPricing,
-} from "../db/queries/special_pricing.js";
-
-// Then your POST route uses createSpecial_Pricing (line 20)
-// Your PUT route uses updateSpecialPricing (line 30)
-// Your DELETE route uses deleteSpecialPricing (line 38)
+import { createSpecial_Pricing, getSpecial_Pricing } from "../db/queries/special_pricing.js";
+import { requireAuth } from "#middleware/requireAuth";
+import { requireRole } from "#middleware/requireRole";
+import requireBody from "#middleware/requireBody";
 
 const router = express.Router();
 export default router;
@@ -22,26 +16,47 @@ router.route("/special_pricing/:id").get(async (req, res) => {
   const special_priceById = await getSpecial_Pricing(req.params.id);
   res.send(special_priceById);
 });
-// Jodson- add special pricing creation, update, delete routes below
-// CREATE special pricing (POST)
-router.route("/special_pricing").post(async (req, res) => {
-  const pricingData = req.body;
-  const newPricing = await createSpecial_Pricing(pricingData);
-  res.status(201).json(newPricing);
-});
 
-// UPDATE special pricing (PUT)
-router.route("/special_pricing/:id").put(async (req, res) => {
-  const pricingId = req.params.id;
-  const pricingData = req.body;
-  const updatedPricing = await updateSpecialPricing(pricingId, pricingData);
-  res.json(updatedPricing);
-});
+router.route("/special_pricing").post(
+  requireAuth,
+  requireRole([1]),
+  requireBody(["product_id", "special_price", "start_date", "end_date", "created_by_user_id"]),
+  async (req, res) => {
+  const {product_id, special_price, start_date, end_date, created_by_user_id} = req.body;
+  const price =Number(special_price);
 
-// DELETE special pricing (DELETE)
-router.route("/special_pricing/:id").delete(async (req, res) => {
-  const pricingId = req.params.id;
-  // TODO: Add deleteSpecialPricing query function
-  await deleteSpecialPricing(pricingId);
-  res.send("Special pricing deleted successfully");
-});
+  if (!Number.isInteger( created_by_user_id )) {
+    return res.status(400).json({
+      error: "Invalid user_id",
+      message: "Not a valid user"
+    })
+  }
+
+  if (isNaN(price)) {
+    return res.status(400).json({
+      error: "Invalid special price",
+      message: "special price must be a valid number"
+    });
+  }
+
+  if (price <= 0 ) {
+    return res.status(400).json({
+      error: "Invalid special price",
+      message: "Special price must be greater than 0"
+    })
+  }
+
+  if (!Number.isInteger(price * 100)) {
+    return res.status(400).json({
+      error:"Invalid special price",
+      message: "special price must have at most 2 decimal places"
+    })
+  }
+
+  const sp = await createSpecial_Pricing({product_id, special_price : price, start_date, end_date, created_by_user_id})
+
+  res.status(201).json({
+    message: "special price created successfully",
+    sp
+  })
+})
