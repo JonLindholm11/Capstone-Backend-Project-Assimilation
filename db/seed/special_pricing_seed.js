@@ -7,7 +7,6 @@ export async function seedSpecial_Pricing() {
     special_price: 15.99,
     start_date: "2025-10-30T:10:00:00Z",
     end_date: "2025-11-15T:10:00:00Z",
-    is_active: true,
     created_by_user_id: 1,
   },
 ]

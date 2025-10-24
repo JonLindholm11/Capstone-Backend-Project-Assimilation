@@ -5,12 +5,11 @@ export async function createSpecial_Pricing({
   special_price,
   start_date,
   end_date,
-  is_active,
   created_by_user_id,
 }) {
   const SQL = `
     INSERT INTO special_pricing
-    (product_id, special_price, start_date, end_date, is_active, created_by_user_id)
+    (product_id, special_price, start_date, end_date, created_by_user_id)
     VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *
     `;
@@ -19,7 +18,6 @@ export async function createSpecial_Pricing({
     special_price,
     start_date,
     end_date,
-    is_active,
     created_by_user_id,
   ]);
   return rows[0];
@@ -32,7 +30,6 @@ export async function getSpecialPricing() {
       special_pricing.special_price,
       special_pricing.start_date,
       special_pricing.end_date,
-      special_pricing.is_active,
       products.id AS product_id,
       products.product_name,
       products.product_category,
@@ -59,43 +56,14 @@ export async function getSpecial_Pricing() {
   return rows;
 }
 
-export async function getSpecial_PricingBySpecial_Price(special_price) {
+export async function getActiveSpecials() {
   const SQL = `
-    SELECT * FROM special_pricing
-    WHERE special_price = $1
-    `;
-  const { rows } = await db.query(SQL, [special_price]);
-  return rows;
-}
-
-export async function getSpecial_PricingByStart_DateAndEndDate(
-  start_date,
-  end_date
-) {
-  const SQL = `
-    SELECT * FROM special_pricing
-    WHERE start_date = $1 AND end_date = $2
-    `;
-  const { rows } = await db.query(SQL, [start_date, end_date]);
-  return rows;
-}
-
-export async function getSpecial_PricingByIs_Active(is_active) {
-  const SQL = `
-    SELECT * FROM special_pricing
-    WHERE is_active = $1
-    `;
-  const { rows } = await db.query(SQL, [is_active]);
-  return rows;
-}
-
-export async function getSpecial_PricingByCreatedByUserId(created_by_user_id) {
-  const SQL = `
-    SELECT * FROM special_pricing
-    WHERE created_by_user_id = $1
-    `;
-  const { rows } = await db.query(SQL, [created_by_user_id]);
-  return rows;
+  SELECT * FROM special_pricing
+  WHERE start_date <= NOW()
+  AND end_date >= NOW()
+  `
+  const { rows : activeSpecial } = db.query(SQL)
+  return activeSpecial
 }
 
 export async function getSpecial_PricingById(id) {

@@ -63,7 +63,6 @@ CREATE TABLE special_pricing(
     special_price DECIMAL(10, 2),
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
-    is_active BOOLEAN DEFAULT true,
     created_by_user_id INT REFERENCES users(id) NOT NULL
 );
 
