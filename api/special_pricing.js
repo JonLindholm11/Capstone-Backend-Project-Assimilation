@@ -32,6 +32,13 @@ router.route("/special_pricing").post(
     })
   }
 
+  if (!Number.isInteger(price)) {
+    return res.status(400).json({
+      error: "Special price is not a number",
+      message: "Special price is not a number"
+    })
+  }
+
   if (isNaN(price)) {
     return res.status(400).json({
       error: "Invalid special price",
