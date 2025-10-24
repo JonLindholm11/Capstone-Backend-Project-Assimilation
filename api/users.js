@@ -65,3 +65,27 @@ router
     const token = await createToken({ id: user.id, role_id: user.role_id });
     res.json({ token });
   });
+
+  router.patch(
+  "/users/:id/role",
+  requireAuth,
+  requireRole([1]),
+  async (req, res) => {
+    const userId = parseInt(req.params.id);
+    const { role_id } = req.body;
+
+    if (req.user.id === userId && role_id !== 1) {
+      return res.status(403).json({
+        error: "Cannot demote yourself",
+      });
+    }
+    try {
+      const updatedUser = await updatedRole_Id(userId, role_id);
+      res.json({
+        message: "Role updated successfully",
+        user: updatedUser,
+      });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }}
+  )
