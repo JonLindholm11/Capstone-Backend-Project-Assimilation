@@ -9,13 +9,13 @@ import { requireRole } from "#middleware/requireRole";
 
 router
   .route("/register")
-  .post(requireBody(["username", "password", "role_id"]), async (req, res) => {
-    const { username, password, role_id } = req.body;
+  .post(requireBody(["email", "password", "role_id"]), async (req, res) => {
+    const { email, password, role_id } = req.body;
 
     const user = await createUser({
-      email: username,
-      password: password,
-      role_id: role_id,
+      email,
+      password,
+      role_id,
     });
 
     const token = await createToken({ id: user.id, role_id: user.role_id });
