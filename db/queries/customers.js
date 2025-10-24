@@ -112,3 +112,38 @@ export async function getCustomerByAccountStatus() {
 
   return { pending, active };
 }
+
+//Jodson - update and delete customer functions below
+
+export async function updateCustomer(customerId, customerData) {
+  const SQL = `
+    UPDATE customers 
+    SET 
+      company_name = $1,
+      contact_name = $2,
+      email = $3,
+      assigned_salesman_id = $4,
+      account_status = $5
+    WHERE id = $6
+    RETURNING *
+  `;
+  const { rows } = await db.query(SQL, [
+    customerData.company_name,
+    customerData.contact_name,
+    customerData.email,
+    customerData.assigned_salesman_id,
+    customerData.account_status,
+    customerId
+  ]);
+  return rows[0];
+}
+
+export async function deleteCustomer(customerId) {
+  const SQL = `
+    DELETE FROM customers 
+    WHERE id = $1 
+    RETURNING *
+  `;
+  const { rows } = await db.query(SQL, [customerId]);
+  return rows[0];
+}

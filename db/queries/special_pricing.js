@@ -106,3 +106,33 @@ export async function getSpecial_PricingById(id) {
   const { rows } = await db.query(SQL, [id]);
   return rows;
 }
+// Jodson- add update and delete functions below
+
+export async function updateSpecialPricing(pricingId, pricingData) {
+  const SQL = `
+    UPDATE special_pricing 
+    SET 
+      product_id = $1,
+      special_price = $2,
+      start_date = $3,
+      end_date = $4,
+      is_active = $5
+    WHERE id = $6
+    RETURNING *
+  `;
+  const { rows } = await db.query(SQL, [
+    pricingData.product_id,
+    pricingData.special_price,
+    pricingData.start_date,
+    pricingData.end_date,
+    pricingData.is_active,
+    pricingId
+  ]);
+  return rows[0];
+}
+
+export async function deleteSpecialPricing(pricingId) {
+  const SQL = `DELETE FROM special_pricing WHERE id = $1 RETURNING *`;
+  const { rows } = await db.query(SQL, [pricingId]);
+  return rows[0];
+}

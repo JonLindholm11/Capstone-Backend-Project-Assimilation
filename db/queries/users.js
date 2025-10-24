@@ -56,24 +56,25 @@ export async function getUserById(id) {
   } = await db.query(sql, [id]);
   return user;
 }
+// Jodson - added functions for updating and deleting users for admin panel
 
-export async function updateRole_Id(id, newRoleId) {
-  if (!Number.isInteger(newRoleId) || newRoleId < 1 || newRoleId > 4) {
-    throw new Error("role_id must be a integer between 1 and 4");
-  }
-  const SQL = `
-  UPDATE users
-  SET role_id = $1
-  WHERE id = $2
-  RETURNING id, email, role_id
+export async function updateUserRole(userId, roleId) {
+  const sql = `
+    UPDATE users 
+    SET role_id = $1 
+    WHERE id = $2 
+    RETURNING id, email, role_id
   `;
-  const {
-    rows: [updatedEmployeeRole],
-  } = db.query(SQL, [newRoleId, id]);
+  const { rows: [user] } = await db.query(sql, [roleId, userId]);
+  return user;
+}
 
-  if (!updatedUser) {
-    throw new Error("User not found");
-  }
-
-  return updatedEmployeeRole;
+export async function deleteUser(userId) {
+  const sql = `
+    DELETE FROM users 
+    WHERE id = $1 
+    RETURNING id, email, role_id
+  `;
+  const { rows: [user] } = await db.query(sql, [userId]);
+  return user;
 }
