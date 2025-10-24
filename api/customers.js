@@ -12,6 +12,11 @@ router.route("/customers").get(async (req, res) => {
   res.json(customers);
 });
 
+router.route("/customers/salesman/:salesman_id").get(async (req,res) => {
+  const customersBySalesman_Id = await getCustomerByAssigned_Salesman_Id(req.params.salesman_id)
+  res.json(customersBySalesman_Id)
+})
+
 router.route("/customers/:id").get(async (req, res) => {
   const customersById = await getCustomersById(req.params.id);
   res.send(customersById);
