@@ -17,7 +17,7 @@ router.route("/orders").get(async (req, res) => {
 
 router
   .route("/orders/date/:created_date")
-  .get(requireAuth(), requireRole([1, 2, 3]), async (req, res) => {
+  .get(requireAuth, requireRole([1, 2, 3]), async (req, res) => {
     const ordersByDate = await getOrdersByCreated_Date(req.params.created_date);
     res.json({
       ordersByDate,
