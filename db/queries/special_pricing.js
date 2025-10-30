@@ -10,7 +10,7 @@ export async function createSpecial_Pricing({
   const SQL = `
     INSERT INTO special_pricing
     (product_id, special_price, start_date, end_date, created_by_user_id)
-    VALUES ($1, $2, $3, $4, $5, $6)
+    VALUES ($1, $2, $3, $4, $5)
     RETURNING *
     `;
   const { rows } = await db.query(SQL, [
