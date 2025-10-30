@@ -20,14 +20,12 @@ router
   });
 
 router
-  .route("/customer_pricing/:customer_id").get(
-    requireAuth,
-    requireRole([1,2]),
-    async (req,res) => {
-        const customerPricingByCustomerId = await getCustomerCategoryPricingByCustomerId(req.params.customer_id)
-        res.json(customerPricingByCustomerId)
-    }
-  )
+  .route("/customer_pricing/:customer_id")
+  .get(requireAuth, requireRole([1, 2]), async (req, res) => {
+    const customerPricingByCustomerId =
+      await getCustomerCategoryPricingByCustomerId(req.params.customer_id);
+    res.json(customerPricingByCustomerId);
+  });
 
 router
   .route("/customer_pricing/:customer_id")
@@ -71,3 +69,25 @@ router
       }
     }
   );
+
+router
+  .route("/customer_pricing")
+  .post(requireAuth, requireRole([1, 2]), async (req, res) => {
+    try {
+      const { customer_id, product_category, price_tier_id } = req.body;
+
+      const customer_pricing = await createCustomer_Category_Pricing({
+        customer_id,
+        product_category,
+        price_tier_id,
+      });
+
+      res.status(201).json({
+        message: "customer discount set up successfully",
+        customer_pricing,
+      });
+    } catch (error) {
+      console.error("Error creating customer pricing:", error);
+      res.status(500).json({ error: "Failed to create customer pricing" });
+    }
+  });
