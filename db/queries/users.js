@@ -39,7 +39,7 @@ export async function getEmployees() {
   const SQL = `
   SELECT id, email, role_id
   FROM users
-  WHERE role_id < 3
+  WHERE role_id <= 3
   `;
   const { rows: employees } = await db.query(SQL);
   return employees;
