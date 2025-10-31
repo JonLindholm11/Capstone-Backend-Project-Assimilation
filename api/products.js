@@ -24,3 +24,5 @@ router.route("/products/:id").get(async (req, res) => {
   const productsById = await getProductsById(req.params.id);
   res.send(productsById);
 });
+
+router.route("/products").post()

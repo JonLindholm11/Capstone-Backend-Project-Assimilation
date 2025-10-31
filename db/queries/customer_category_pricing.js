@@ -42,7 +42,21 @@ export async function joinCustomerCategoryPricing() {
 
 export async function getCustomerCategoryPricing() {
   const SQL = `
-  SELECT * FROM customer_category_pricing
+    SELECT
+      ccp.id,
+      ccp.product_category,
+      ccp.customer_id,
+      ccp.price_tier_id,
+      customers.company_name,
+      customers.contact_name,
+      customers.email,
+      customers.user_id,
+      price_categories.category_name,
+      price_categories.discount_percentage,
+      price_categories.tier_level
+    FROM customer_category_pricing ccp
+    LEFT JOIN customers ON ccp.customer_id = customers.id
+    LEFT JOIN price_categories ON ccp.price_tier_id = price_categories.id
   `;
   const { rows: customerPricing } = await db.query(SQL);
   return customerPricing;
@@ -50,26 +64,25 @@ export async function getCustomerCategoryPricing() {
 
 export async function getCustomerCategoryPricingByCustomerId(customer_id) {
   const SQL = `
-  SELECT * FROM customer_category_pricing
-  WHERE customer_id = $1
-  `
-  const { rows : customerPricingByCustomerId } = await db.query(SQL, [customer_id])
-  return customerPricingByCustomerId
-}
-
-export async function checkIfCustomerPricingExists(
-  customer_id,
-  product_category
-) {
-  const SQL = `
-  SELECT * FROM customer_category_pricing
-  WHERE customer_id = $1 AND product_category = $2
+    SELECT
+      ccp.id,
+      ccp.product_category,
+      ccp.customer_id,
+      ccp.price_tier_id,
+      customers.company_name,
+      customers.contact_name,
+      customers.email,
+      customers.user_id,
+      price_categories.category_name,
+      price_categories.discount_percentage,
+      price_categories.tier_level
+    FROM customer_category_pricing ccp
+    LEFT JOIN customers ON ccp.customer_id = customers.id
+    LEFT JOIN price_categories ON ccp.price_tier_id = price_categories.id
+    WHERE ccp.customer_id = $1
   `;
-  const { rows: customerPricing } = await db.query(SQL, [
-    customer_id,
-    product_category,
-  ]);
-  return customerPricing.length > 0 ? customerPricing[0] : null;
+  const { rows: customerPricingByCustomerId } = await db.query(SQL, [customer_id]);
+  return customerPricingByCustomerId;
 }
 
 export async function updateCustomerCategoryPricing(id, new_price_tier_id) {
