@@ -91,3 +91,23 @@ router
       res.status(500).json({ error: "Failed to create customer pricing" });
     }
   });
+
+router
+  .route("/update/customer_pricing/:id")
+  .patch(requireAuth, requireRole([1, 2]), async (req, res) => {
+    const id = parseInt(req.params.id);
+    const { price_tier_id } = req.body;
+
+    try {
+      const customer_category_pricing = await updateCustomerCategoryPricing(
+        id,
+        price_tier_id
+      );
+      res.json({
+        message: "customer pricing updated successfully",
+        customer_category_pricing,
+      });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  });
