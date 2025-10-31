@@ -1,5 +1,4 @@
 import {
-  checkIfCustomerPricingExists,
   createCustomer_Category_Pricing,
   getCustomerCategoryPricing,
   getCustomerCategoryPricingByCustomerId,
@@ -15,63 +14,14 @@ export default router;
 router
   .route("/customer_pricing")
   .get(requireAuth, requireRole([1, 2]), async (req, res) => {
-    const customerPricing = await getCustomerCategoryPricing();
-    res.json(customerPricing);
-  });
-
-router
-  .route("/customer_pricing/:customer_id")
-  .get(requireAuth, requireRole([1, 2]), async (req, res) => {
-    const customerPricingByCustomerId =
-      await getCustomerCategoryPricingByCustomerId(req.params.customer_id);
-    res.json(customerPricingByCustomerId);
-  });
-
-router
-  .route("/customer_pricing/:customer_id")
-  .put(
-    requireAuth,
-    requireRole([1, 2]),
-    requireBody(["customer_id", "product_category", "price_tier_id"]),
-    async (req, res) => {
-      try {
-        const { customer_id, product_category, price_tier_id } = req.body;
-
-        const customerPricingExists = await checkIfCustomerPricingExists(
-          customer_id,
-          product_category
-        );
-
-        let result;
-        if (customerPricingExists) {
-          result = await updateCustomerCategoryPricing(
-            customerPricingExists.id,
-            price_tier_id
-          );
-          return res.json({
-            action: "updated",
-            data: result,
-          });
-        } else {
-          result = await createCustomer_Category_Pricing(
-            customer_id,
-            product_category,
-            price_tier_id
-          );
-          return res.json({
-            action: "created",
-            data: result,
-          });
-        }
-      } catch (error) {
-        console.error("Error saving customer pricing:", error);
-        res.status(500).json({ error: "Failed to save customer pricing" });
-      }
+    try {
+      const customerPricing = await getCustomerCategoryPricing();
+      res.json(customerPricing);
+    } catch (error) {
+      console.error("Error fetching customer pricing:", error);
+      res.status(500).json({ error: "Failed to fetch customer pricing" });
     }
-  );
-
-router
-  .route("/customer_pricing")
+  })
   .post(requireAuth, requireRole([1, 2]), async (req, res) => {
     try {
       const { customer_id, product_category, price_tier_id } = req.body;
@@ -93,7 +43,20 @@ router
   });
 
 router
-  .route("/update/customer_pricing/:id")
+  .route("/customer_pricing/:customer_id")
+  .get(requireAuth, requireRole([1, 2]), async (req, res) => {
+    try {
+      const customerPricingByCustomerId =
+        await getCustomerCategoryPricingByCustomerId(req.params.customer_id);
+      res.json(customerPricingByCustomerId);
+    } catch (error) {
+      console.error("Error fetching customer pricing by ID:", error);
+      res.status(500).json({ error: "Failed to fetch customer pricing" });
+    }
+  });
+
+router
+  .route("/customer_pricing/:id")
   .patch(requireAuth, requireRole([1, 2]), async (req, res) => {
     const id = parseInt(req.params.id);
     const { price_tier_id } = req.body;
@@ -108,6 +71,7 @@ router
         customer_category_pricing,
       });
     } catch (error) {
+      console.error("Error updating customer pricing:", error);
       res.status(400).json({ error: error.message });
     }
   });
