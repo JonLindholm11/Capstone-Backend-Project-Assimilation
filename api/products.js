@@ -17,8 +17,3 @@ router.route("/products/:id").get(async (req, res) => {
   const productsById = await getProductsById(req.params.id);
   res.send(productsById);
 });
-
-router.route("/products").get(async (req, res) => {
-  const products = await getProducts();
-  res.send(products);
-});
