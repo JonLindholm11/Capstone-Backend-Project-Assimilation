@@ -2,6 +2,7 @@ import express from "express";
 import { 
   getCustomers, 
   getCustomersById,
+  getCustomerByAssigned_Salesman_Id
 } from "../db/queries/customers.js";
 
 const router = express.Router();

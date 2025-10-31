@@ -7,7 +7,7 @@ export async function seedCustomers() {
       company_name: "test1",
       contact_name: null,
       email: "customertest_1@email.com",
-      assigned_salesman_id: 1,
+      assigned_salesman_id: 2,
       account_status: "active",
     },
     {
@@ -15,7 +15,7 @@ export async function seedCustomers() {
       company_name: null,
       contact_name: "test2",
       email: "customertest_2@email.com",
-      assigned_salesman_id: 1,
+      assigned_salesman_id: 2,
       account_status: "active",
     },
     {
