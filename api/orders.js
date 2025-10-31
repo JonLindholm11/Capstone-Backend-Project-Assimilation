@@ -28,6 +28,7 @@ router
         const order = await createOrders(customer_id);
         const orderItems = await createOrder_Items(
           order.id,
+          customer_id,
           product_id,
           quantity
         );
