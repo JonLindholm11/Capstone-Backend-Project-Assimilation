@@ -79,7 +79,7 @@ export async function seedProducts() {
       product_name: "Gwagen 63",
       product_category: "vehicles",
       product_description: "Geländewagen is a luxury SUV made by Mercedes-Benz",
-      basic_price: 199999.00,
+      basic_price: 199999.0,
       product_img:
         "https://images.pexels.com/photos/3457780/pexels-photo-3457780.jpeg",
     },
@@ -87,7 +87,7 @@ export async function seedProducts() {
       product_name: "Toyota Land Cruiser",
       product_category: "vehicles",
       product_description: "Durable, and highly capable four-wheel-drive SUV",
-      basic_price: 87745.00,
+      basic_price: 87745.0,
       product_img:
         "https://images.pexels.com/photos/3879065/pexels-photo-3879065.jpeg",
     },
@@ -95,7 +95,7 @@ export async function seedProducts() {
       product_name: "lamborghini murcielago",
       product_category: "vehicles",
       product_description: "Aggressive-looking, two-seater V12 supercar",
-      basic_price: 300000.00,
+      basic_price: 300000.0,
       product_img:
         "https://images.pexels.com/photos/3422964/pexels-photo-3422964.jpeg",
     },
@@ -104,7 +104,7 @@ export async function seedProducts() {
       product_category: "vehicles",
       product_description:
         "Iconic sports car known for its performance and design",
-      basic_price: 251000.00,
+      basic_price: 251000.0,
       product_img:
         "https://images.pexels.com/photos/1972736/pexels-photo-1972736.jpeg",
     },
@@ -112,7 +112,7 @@ export async function seedProducts() {
       product_name: "Jeep Wrangler",
       product_category: "vehicles",
       product_description: "Iconic off-road vehicle with rugged design",
-      basic_price: 102000.00,
+      basic_price: 102000.0,
       product_img:
         "https://images.pexels.com/photos/2882234/pexels-photo-2882234.jpeg",
     },
@@ -121,7 +121,7 @@ export async function seedProducts() {
       product_category: "vehicles",
       product_description:
         "High-performance sports car with a powerful V10 engine",
-      basic_price: 161395.00,
+      basic_price: 161395.0,
       product_img:
         "https://images.pexels.com/photos/1545743/pexels-photo-1545743.jpeg",
     },
@@ -129,7 +129,7 @@ export async function seedProducts() {
       product_name: "Ford Mustang",
       product_category: "vehicles",
       product_description: "Classic American muscle car with a powerful engine",
-      basic_price: 43000.00,
+      basic_price: 43000.0,
       product_img:
         "https://images.pexels.com/photos/1805053/pexels-photo-1805053.jpeg",
     },
@@ -220,7 +220,7 @@ export async function seedProducts() {
         "a long 16' piece of metal meant to detail fresh concrete",
       basic_price: 54.98,
       product_img:
-        "https://www.istockphoto.com/photo/industrial-worker-on-construction-site-laying-sealant-for-waterproofing-cement-gm535411978-94897317?utm_source=pexels&utm_medium=affiliate&utm_campaign=sponsored_photo&utm_content=srp_inline_portrait_media&utm_term=concrete%20tool",
+        "https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg",
     },
     {
       product_name: "shovel",
@@ -228,23 +228,23 @@ export async function seedProducts() {
       product_description: "Meant to dig ",
       basic_price: 32.98,
       product_img:
-        "https://www.istockphoto.com/photo/shovel-in-heap-of-dirt-gm172146091-255252?utm_source=pexels&utm_medium=affiliate&utm_campaign=sponsored_photo&utm_content=srp_inline_media&utm_term=shovel",
+        "https://images.pexels.com/photos/7276957/pexels-photo-7276957.jpeg",
     },
     {
       product_name: "skid steer ",
       product_category: "construction tools",
       product_description: " a front loading piece of equipment",
-      basic_price: 44995.00,
+      basic_price: 44995.0,
       product_img:
-        "https://www.pexels.com/photo/skid-loader-on-a-baseball-field-25559744/",
+        "https://images.pexels.com/photos/25559744/pexels-photo-25559744.jpeg",
     },
     {
       product_name: "mini excavator",
       product_category: "construction tools",
       product_description: "a better shovel",
-      basic_price: 25000.00,
+      basic_price: 25000.0,
       product_img:
-        "https://www.pexels.com/photo/mini-excavator-in-melbourne-public-parking-lot-31461653/",
+        "https://images.pexels.com/photos/31461653/pexels-photo-31461653.jpeg",
     },
     {
       product_name: "nail gun ",
@@ -252,7 +252,7 @@ export async function seedProducts() {
       product_description: " a air powered nail driver ",
       basic_price: 299.11,
       product_img:
-        "https://www.pexels.com/photo/drilling-hole-on-the-wall-6473980/",
+        "https://images.pexels.com/photos/6473980/pexels-photo-6473980.jpeg",
     },
     {
       product_name: "hammer",
@@ -260,7 +260,7 @@ export async function seedProducts() {
       product_description: " a metal hammer ",
       basic_price: 29.94,
       product_img:
-        "https://www.pexels.com/photo/black-claw-hammer-on-brown-wooden-plank-209235/",
+        "https://images.pexels.com/photos/209235/pexels-photo-209235.jpeg",
     },
     {
       product_name: "pizza",
@@ -268,7 +268,7 @@ export async function seedProducts() {
       product_description: "a circle cut into triangles",
       basic_price: 12.29,
       product_img:
-        "https://www.pexels.com/photo/close-up-photo-of-person-holding-pizza-1653877/",
+        "https://images.pexels.com/photos/1653877/pexels-photo-1653877.jpeg",
     },
     {
       product_name: "pasta",
@@ -276,15 +276,15 @@ export async function seedProducts() {
       product_description: " noodles",
       basic_price: 1.99,
       product_img:
-        "https://www.pexels.com/photo/homemade-fresh-spaghetti-on-black-tray-5907896/",
+        "https://images.pexels.com/photos/5907896/pexels-photo-5907896.jpeg",
     },
     {
       product_name: "tacos",
       product_category: "food",
       product_description: "meat in tortilla ",
-      basic_price: 12.00,
+      basic_price: 12.0,
       product_img:
-        "https://www.pexels.com/photo/cooked-food-on-blue-plate-2092507/",
+        "https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg",
     },
     {
       product_name: "White Bread",
@@ -320,7 +320,7 @@ export async function seedProducts() {
     },
   ];
   for (const product of products) {
-      await createProducts(product);
-    }
-    console.log("completed seeding products");
+    await createProducts(product);
+  }
+  console.log("completed seeding products");
 }
