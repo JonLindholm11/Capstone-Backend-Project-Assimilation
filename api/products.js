@@ -8,6 +8,11 @@ import {
 const router = express.Router();
 export default router;
 
+router.route("/products").get(async (req, res) => {
+  const products = await getProducts();
+  res.send(products);
+});
+
 router.route("/products/category/:category").get(async (req, res) => {
   const productsByCategory = await getProductsByCategory(req.params.category);
   res.send(productsByCategory);
