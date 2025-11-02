@@ -12,9 +12,7 @@ export default router;
 
 router.route("/products").get(async (req, res) => {
   try {
-    console.log('1. Getting products...');
     const products = await getProducts();
-    console.log('2. Products retrieved:', products.length);
     
     const user_id = req.user?.id;
     
@@ -22,7 +20,6 @@ router.route("/products").get(async (req, res) => {
     
     res.send(productsWithPricing);
   } catch (error) {
-    console.error('ERROR:', error);
     res.status(500).json({ error: error.message });
   }
 });
