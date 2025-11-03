@@ -4,6 +4,7 @@ import {
   getOrders,
   getOrdersByCreated_Date,
   getOrdersById,
+  updateOrderStatus,
 } from "../db/queries/orders.js";
 import { requireAuth } from "#middleware/requireAuth";
 import { requireRole } from "#middleware/requireRole";
@@ -76,3 +77,26 @@ router.route("/orders/:id").get(async (req, res) => {
   const ordersById = await getOrdersById(req.params.id);
   res.send(ordersById);
 });
+
+router.route("/orders/:id/status").patch(
+  requireAuth,
+  requireRole([1,2,3]),
+  async (req, res) => {
+      const id = parseInt(req.params.id);
+      const { order_status } = req.body;
+
+      try {
+        const order = await updateOrderStatus(
+          id,
+          order_status
+        );
+        res.json({
+          message: "order status updated successfully",
+          order
+        });
+      } catch (error) {
+        console.error("error updating customer pricing")
+        res.status(400).json({error : error.message})
+      }
+  }
+)
