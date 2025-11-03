@@ -61,7 +61,7 @@ export async function getOrdersByCustomerId(customer_id) {
     SELECT * FROM orders
     WHERE customer_id = $1
     `;
-  const { rows: ci } = await db.query(SQL, customer_id);
+  const { rows: ci } = await db.query(SQL, [customer_id]);
   return ci;
 }
 

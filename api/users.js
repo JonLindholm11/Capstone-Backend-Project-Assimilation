@@ -6,6 +6,9 @@ import requireBody from "#middleware/requireBody";
 import { createToken } from "#utils/jwt";
 import { requireAuth } from "#middleware/requireAuth";
 import { requireRole } from "#middleware/requireRole";
+import { getCustomerByUser_Id } from "#db/queries/customers";
+import { getOrdersByCustomerId } from "#db/queries/orders";
+import { getUserById } from "#db/queries/users";
 
 router
   .route("/register")
@@ -65,6 +68,33 @@ router
     const token = await createToken({ id: user.id, role_id: user.role_id });
     res.json({ token });
   });
+
+  router.route("/me").get(
+  requireAuth,
+  async(req, res) => {
+    try {
+      const userId = req.user.id
+
+      const [ user, customers ] = await Promise.all([
+        getUserById(userId),
+        getCustomerByUser_Id(userId)
+      ]);
+
+      const customer = customers[0];
+
+      if (!customer) {
+        return res.status(404).json({ error: 'No customer found for this user' });
+      }
+
+      const orders = await getOrdersByCustomerId(customer.id)
+
+      res.status(200).json({user, customer, orders})
+    } catch (error) {
+      console.error('Error in /users/me:', error);
+      res.status(500).json({error: 'Failed to fetch user data'})
+    }
+  }
+)
 
   router.route("/employees").get(
     requireAuth,
