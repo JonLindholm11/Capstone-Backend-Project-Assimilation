@@ -3,7 +3,7 @@ import {
   getCustomers,
   getCustomersById,
   getCustomerByAssigned_Salesman_Id,
-  updateCustomerAssignedRepId,
+  updateCustomerAssignedSalesmanId,
 } from "../db/queries/customers.js";
 import { requireAuth } from "#middleware/requireAuth";
 import { requireRole } from "#middleware/requireRole";
