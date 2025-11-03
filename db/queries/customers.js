@@ -113,19 +113,19 @@ export async function getCustomerByAccountStatus() {
   return { pending, active };
 }
 
-export async function updateCustomerAssignedRepId(id, new_assigned_service_rep) {
-  if (!Number.isInteger(new_assigned_service_rep) || new_assigned_service_rep <= 1) {
+export async function updateCustomerAssignedSalesmanId(id, new_assigned_salesman_id) {
+  if (!Number.isInteger(new_assigned_salesman_id) || new_assigned_salesman_id <= 1) {
     throw new Error("service rep must be a an integer");
   }
   const SQL = `
   UPDATE customer
-  SET assigned_service_rep = $1
+  SET assigned_salesman_id = $1
   WHERE id = $2,
   RETURNING id, assigned_service_rep
   `
   const {
     rows : [updatedCustomerRep]
-  } = await db.query(SQL, [new_assigned_service_rep, id])
+  } = await db.query(SQL, [new_assigned_salesman_id, id])
 
   if (!updatedCustomerRep) {
     throw new Error("error updating service rep")

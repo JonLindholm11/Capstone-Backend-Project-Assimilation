@@ -32,19 +32,19 @@ router
   .route("/customers/:id")
   .patch(requireAuth, requireRole([1]), async (req, res) => {
     const id = parseInt(req.params.id);
-    const { assigned_service_rep } = req.body;
+    const { assigned_salesman_id } = req.body;
 
     try {
-      const customer = await updateCustomerAssignedRepId(
+      const customer = await updateCustomerAssignedSalesmanId(
         id,
-        assigned_service_rep
+        assigned_salesman_id
       );
       res.json({
-        message: "customer rep updated successfully",
+        message: "customer's salesman updated successfully",
         customer,
       });
     } catch (error) {
-      console.error("Error updating customer rep", error);
+      console.error("Error updating customer assigned salesman", error);
       res.status(400).json({ error: error.message });
     }
   });
