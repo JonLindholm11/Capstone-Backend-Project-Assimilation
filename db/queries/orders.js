@@ -109,3 +109,20 @@ export async function getOrdersById(id) {
   const { rows: oid } = await db.query(SQL, [id]);
   return oid;
 }
+
+export async function updateOrderStatus(id, new_order_status) {
+  const SQL = `
+    UPDATE orders
+    SET order_status = $1
+    WHERE id = $2
+    RETURNING id, order_status
+  `;
+  
+  const { rows: [orderStatus] } = await db.query(SQL, [new_order_status, id]);
+
+  if (!orderStatus) {
+    throw new Error("order status not found");
+  }
+  
+  return orderStatus;
+}
