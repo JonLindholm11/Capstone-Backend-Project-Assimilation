@@ -12,6 +12,7 @@ import orderItemsRouter from './api/order_items.js';
 import ordersRouter from './api/orders.js';
 import productsRouter from './api/products.js';
 import specialPricingRouter from './api/special_pricing.js';
+import customer_category_pricingRouter from './api/customer_category_pricing.js'
 
 app.use(cors({ origin: process.env.CORS_ORIGIN ?? /localhost/ }));
 
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(getUserFromToken);
 
+app.use(customer_category_pricingRouter)
 app.use(customersRouter);
 app.use(orderItemsRouter);
 app.use(ordersRouter);

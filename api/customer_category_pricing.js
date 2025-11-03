@@ -13,7 +13,9 @@ export default router;
 
 router
   .route("/customer_pricing")
-  .get(requireAuth, requireRole([1, 2]), async (req, res) => {
+  .get(
+    requireAuth, requireRole([1, 2]),
+    async (req, res) => {
     try {
       const customerPricing = await getCustomerCategoryPricing();
       res.json(customerPricing);
@@ -22,7 +24,9 @@ router
       res.status(500).json({ error: "Failed to fetch customer pricing" });
     }
   })
-  .post(requireAuth, requireRole([1, 2]), async (req, res) => {
+  .post(
+    requireAuth, requireRole([1, 2]),
+    async (req, res) => {
     try {
       const { customer_id, product_category, price_tier_id } = req.body;
 

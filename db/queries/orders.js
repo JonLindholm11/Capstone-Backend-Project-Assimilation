@@ -2,27 +2,26 @@ import db from "#db/client";
 
 export async function createOrders({
   customer_id,
-  order_date,
   total_amount,
   order_status,
   assigned_service_rep,
   created_date
 }) {
-  const SQL = `
-    INSERT INTO orders
-    (customer_id, order_date, total_amount, order_status, assigned_service_rep, created_date)
-    VALUES ($1, $2, $3, $4, $5, $6)
-    RETURNING *
-    `;
-  const { rows: orders } = await db.query(
-    SQL,
-    [customer_id,
-    order_date,
-    total_amount,
-    order_status,
-    assigned_service_rep,
-    created_date]
-  );
+  const SQL = created_date
+    ? `INSERT INTO orders
+       (customer_id, total_amount, order_status, assigned_service_rep, created_date)
+       VALUES ($1, $2, $3, $4, $5)
+       RETURNING *`
+    : `INSERT INTO orders
+       (customer_id, total_amount, order_status, assigned_service_rep)
+       VALUES ($1, $2, $3, $4)
+       RETURNING *`;
+  
+  const values = created_date
+    ? [customer_id, total_amount, order_status, assigned_service_rep, created_date]
+    : [customer_id, total_amount, order_status, assigned_service_rep];
+  
+  const { rows: orders } = await db.query(SQL, values);
   return orders;
 }
 
@@ -30,7 +29,6 @@ export async function getOrdersWithDetails() {
   const SQL = `
     SELECT
       orders.id,
-      orders.order_date,
       orders.total_amount,
       orders.order_status,
       orders.created_date,
@@ -65,15 +63,6 @@ export async function getOrdersByCustomerId(customer_id) {
     `;
   const { rows: ci } = await db.query(SQL, customer_id);
   return ci;
-}
-
-export async function getOrdersByOrder_Date(order_date) {
-  const SQL = `
-    SELECT * FROM orders
-    WHERE order_date = $1
-    `;
-  const { rows: od } = await db.query(SQL, order_date);
-  return od;
 }
 
 export async function getOrdersByTotal_Amount(total_amount) {

@@ -69,11 +69,10 @@ CREATE TABLE special_pricing(
 CREATE TABLE orders(
     id SERIAL PRIMARY KEY,
     customer_id INT REFERENCES customers(id) NOT NULL,
-    order_date DATE NOT NULL,
     total_amount DECIMAL(20, 2) NOT NULL,
     order_status VARCHAR(50) NOT NULL,
-    assigned_service_rep INT REFERENCES users(id) NOT NULL,
-    created_date DATE NOT NULL
+    assigned_service_rep INT REFERENCES users(id),
+    created_date TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE order_items(
