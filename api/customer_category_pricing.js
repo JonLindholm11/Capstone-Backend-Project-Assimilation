@@ -47,7 +47,7 @@ router
   });
 
 router
-  .route("/customer_pricing/:customer_id")
+  .route("/customer_pricing/customers/:customer_id")
   .get(requireAuth, requireRole([1, 2]), async (req, res) => {
     try {
       const customerPricingByCustomerId =
