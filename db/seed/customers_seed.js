@@ -11,7 +11,7 @@ export async function seedCustomers() {
       account_status: "active",
     },
     {
-      user_id: 4,
+      user_id: 3,
       company_name: null,
       contact_name: "test2",
       email: "customertest_2@email.com",
@@ -19,7 +19,7 @@ export async function seedCustomers() {
       account_status: "active",
     },
     {
-      user_id: 4,
+      user_id: 2,
       company_name: "test3",
       contact_name: "test3",
       email: "customertest_3@email.com",
@@ -27,7 +27,7 @@ export async function seedCustomers() {
       account_status: "pending",
     },
     {
-      user_id: 4,
+      user_id: 1,
       company_name: null,
       contact_name: null,
       email: "customertest_4@email.com",

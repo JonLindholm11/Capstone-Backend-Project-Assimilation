@@ -61,10 +61,21 @@ export async function getOrder_Items() {
 
 export async function getOrder_ItemsByOrder_Id(order_id) {
   const SQL = `
-    SELECT * FROM order_items
-    WHERE order_id = $1
-    `;
-  const { rows: oi } = await db.query(SQL, order_id);
+    SELECT
+      order_items.id,
+      order_items.order_id,
+      order_items.product_id,
+      order_items.quantity,
+      order_items.unit_price,
+      order_items.total_price,
+      products.product_name,
+      products.product_category,
+      products.product_description
+    FROM order_items
+    LEFT JOIN products ON order_items.product_id = products.id
+    WHERE order_items.order_id = $1
+  `;
+  const { rows: oi } = await db.query(SQL, [order_id]);
   return oi;
 }
 
