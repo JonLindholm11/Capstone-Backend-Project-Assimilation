@@ -4,7 +4,7 @@ import {
   getProductsByCategory,
   getProductsById,
 } from "../db/queries/products.js";
-import { addCustomerPricingByUserId } from "#utils/displayPriceCalculation";
+import { addCustomerPricingByUserId } from "#utils/priceCalculation";
 import db from "../db/client.js";
 
 const router = express.Router();
@@ -12,12 +12,10 @@ export default router;
 
 router.route("/products").get(async (req, res) => {
   try {
-    console.log('1. Getting products...');
     const products = await getProducts();
-    console.log('2. Products retrieved:', products.length);
     
     const user_id = req.user?.id;
-    
+
     const productsWithPricing = await addCustomerPricingByUserId(products, user_id, db);
     
     res.send(productsWithPricing);

@@ -8,7 +8,9 @@ import {
 import { requireAuth } from "#middleware/requireAuth";
 import { requireRole } from "#middleware/requireRole";
 import { createOrder_Items } from "#db/queries/order_items";
+import { processCart } from "#utils/priceCalculation";
 import requireBody from "#middleware/requireBody";
+import db from "../db/client.js";
 
 const router = express.Router();
 export default router;
@@ -19,30 +21,47 @@ router
     const orders = await getOrders();
     res.send(orders);
   })
-  .post(
-    requireAuth,
-    requireBody(["customer_id", "product_id", "quantity"]),
-    async (req, res) => {
-      const { customer_id, product_id, quantity } = req.body;
-      try {
-        const order = await createOrders(customer_id);
-        const orderItems = await createOrder_Items(
-          order.id,
-          customer_id,
-          product_id,
-          quantity
-        );
+.post(
+  requireAuth,
+  requireBody(["customer_id", "cart"]),
+  async (req, res) => {
+    const { customer_id, cart } = req.body;
 
-        res.status(200).json({
-          message: "order created successfully",
-          order,
-          orderItems,
-        });
-      } catch (error) {
-        res.status(500).json({ error: "Failed to create order" });
+    try {
+      const cartCalculation = await processCart(cart, customer_id, db);
+      
+      if (cartCalculation.items.length === 0) {
+        return res.status(400).json({ error: "No valid items in cart" });
       }
+
+      const [order] = await createOrders({
+        customer_id,
+        total_amount: cartCalculation.summary.total,
+        order_status: 'pending',
+        assigned_service_rep: null
+      });
+
+      const orderItems = await Promise.all(cartCalculation.items.map(item =>
+        createOrder_Items({
+          order_id: order.id,
+          product_id: item.product_id,
+          quantity: item.quantity,
+          unit_price: item.customer_price || item.basic_price,
+          total_price: item.line_total
+        })
+      ));
+
+      res.status(200).json({
+        message: "Order created successfully",
+        order,
+        orderItems,
+        calculation: cartCalculation.summary
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to create order" });
     }
-  );
+  }
+);
 
 router
   .route("/orders/date/:created_date")
