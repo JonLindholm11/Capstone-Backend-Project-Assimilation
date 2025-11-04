@@ -83,12 +83,13 @@ export async function getOrdersByOrder_Status(order_status) {
   return os;
 }
 
-export async function getOrdersByAssigned_Service_Rep(assigned_service_rep) {
+export async function getOrdersByAssigned_Service_Rep(assigned_salesman_id) {
   const SQL = `
     SELECT * FROM orders
     WHERE assigned_service_rep = $1
     `;
-  const { rows: asr } = await db.query(SQL, assigned_service_rep);
+  const { rows: asr } = await db.query(SQL, [assigned_salesman_id]
+  );
   return asr;
 }
 

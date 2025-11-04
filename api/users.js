@@ -86,7 +86,7 @@ router
         return res.status(404).json({ error: 'No customer found for this user' });
       }
 
-      const orders = await getOrdersByCustomerId(customer.id)
+      const orders = await getOrdersByCustomerId(customer.id);
 
       res.status(200).json({user, customer, orders})
     } catch (error) {
