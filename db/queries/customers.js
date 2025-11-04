@@ -120,7 +120,7 @@ export async function updateCustomerAssignedSalesmanId(id, new_assigned_salesman
   const SQL = `
   UPDATE customers
   SET assigned_salesman_id = $1
-  WHERE id = $2,
+  WHERE id = $2
   RETURNING id, assigned_service_rep
   `
   const {
