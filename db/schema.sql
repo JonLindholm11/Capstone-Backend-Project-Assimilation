@@ -83,3 +83,14 @@ CREATE TABLE order_items(
     unit_price DECIMAL(10, 2) NOT NULL,
     total_price DECIMAL(20, 2) NOT NULL
 );
+
+CREATE INDEX idx_orders_customer_id ON orders(customer_id);
+CREATE INDEX idx_orders_status ON orders(order_status);
+CREATE INDEX idx_orders_created_date ON orders(created_date);
+CREATE INDEX idx_order_items_order_id ON order_items(order_id);
+CREATE INDEX idx_order_items_product_id ON order_items(product_id);
+CREATE INDEX idx_customers_user_id ON customers(user_id);
+CREATE INDEX idx_customers_salesman_id ON customers(assigned_salesman_id);
+CREATE INDEX idx_customer_pricing_customer_id ON customer_category_pricing(customer_id);
+CREATE INDEX idx_customer_pricing_category ON customer_category_pricing(product_category);
+CREATE INDEX idx_products_category ON products(category);
