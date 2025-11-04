@@ -118,7 +118,7 @@ export async function updateCustomerAssignedSalesmanId(id, new_assigned_salesman
     throw new Error("service rep must be a an integer");
   }
   const SQL = `
-  UPDATE customer
+  UPDATE customers
   SET assigned_salesman_id = $1
   WHERE id = $2,
   RETURNING id, assigned_service_rep
@@ -131,4 +131,22 @@ export async function updateCustomerAssignedSalesmanId(id, new_assigned_salesman
     throw new Error("error updating service rep")
   }
   return updatedCustomerRep
+}
+
+export async function updateCustomerInfo(id, new_company_name, new_contact_name){
+  const SQL = `
+  UPDATE customers
+  SET company_name = $1,
+      contact_name = $2
+  WHERE id = $3
+  RETURNING id, company_name, contact_name
+  `
+
+  const { rows : customerInfo } = await db.query(SQL, [new_company_name, new_contact_name, id])
+
+  if (!customerInfo || customerInfo.length === 0) {
+    throw new Error("error updating info")
+  }
+
+  return customerInfo
 }
