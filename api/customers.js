@@ -20,24 +20,31 @@ router
     res.json(customers);
   })
   .post(requireAuth, async (req, res) => {
-    try {
-      const { id, company_name, contact_name } = req.body;
+  try {
+    const { company_name, contact_name } = req.body;
+    const user_id = req.user.id;
+    const email = req.user.email; 
 
-      const customer = await createCustomers({
-        id,
-        company_name,
-        contact_name,
-      });
+    console.log('Creating customer with:', { user_id, company_name, contact_name, email });
 
-      res.status(201).json({
-        message: "customer created successfully",
-        customer,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Failed to create customer" });
-    }
-  });
+    const customer = await createCustomers({
+      user_id,
+      company_name,
+      contact_name,
+      email,
+      assigned_salesman_id: null,
+      account_status: 'pending'
+    });
+
+    res.status(201).json({
+      message: "customer created successfully",
+      customer,
+    });
+  } catch (error) {
+    console.error('Error message:', error.message);
+    res.status(500).json({ error: "Failed to create customer" });
+  }
+});
 
 router.route("/customers/salesman/:salesman_id").get(async (req, res) => {
   const customersBySalesman_Id = await getCustomerByAssigned_Salesman_Id(

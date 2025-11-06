@@ -5,8 +5,8 @@ export async function createCustomers({
   company_name,
   contact_name,
   email,
-  assigned_salesman_id,
-  account_status,
+  assigned_salesman_id = null,
+  account_status = "pending",
 }) {
   const SQL = `
     INSERT INTO customers (user_id, company_name, contact_name, email, assigned_salesman_id, account_status)
