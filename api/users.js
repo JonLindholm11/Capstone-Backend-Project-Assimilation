@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 export default router;
-import { createUser, getEmployees, getUserByUsernameAndPassword } from "#db/queries/users";
+import { createUser, getEmployees, getUserByUsernameAndPassword, updateRole_Id } from "#db/queries/users";
 import requireBody from "#middleware/requireBody";
 import { createToken } from "#utils/jwt";
 import { requireAuth } from "#middleware/requireAuth";
@@ -106,7 +106,7 @@ router
   )
 
   router.patch(
-  "/users/:id/role",
+  "/:id/role",
   requireAuth,
   requireRole([1]),
   async (req, res) => {
@@ -119,7 +119,7 @@ router
       });
     }
     try {
-      const updatedUser = await updatedRole_Id(userId, role_id);
+      const updatedUser = await updateRole_Id(userId, role_id);
       res.json({
         message: "Role updated successfully",
         user: updatedUser,

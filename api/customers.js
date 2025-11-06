@@ -49,10 +49,7 @@ router.route("/customers/salesman/:salesman_id").get(async (req, res) => {
 router.route("/customers/:id").get(async (req, res) => {
   const customersById = await getCustomersById(req.params.id);
   res.send(customersById);
-});
-
-router
-  .route("/customers/:id")
+})
   .patch(requireAuth, requireRole([1]), async (req, res) => {
     const id = parseInt(req.params.id);
     const { assigned_salesman_id } = req.body;
