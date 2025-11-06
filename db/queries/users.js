@@ -80,11 +80,11 @@ export async function updateRole_Id(id, newRoleId) {
   `;
   const {
     rows: [updatedEmployeeRole],
-  } = db.query(SQL, [newRoleId, id]);
+  } = await db.query(SQL, [newRoleId, id]);
 
-  if (!updatedUser) {
-    throw new Error("User not found");
-  }
+  if (!updatedEmployeeRole) {
+  throw new Error("User not found");
+}
 
   return updatedEmployeeRole
 }

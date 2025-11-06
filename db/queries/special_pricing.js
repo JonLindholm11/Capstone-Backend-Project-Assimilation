@@ -23,7 +23,7 @@ export async function createSpecial_Pricing({
   return rows[0];
 }
 
-export async function getSpecialPricing() {
+export async function joinSpecialPricing() {
   const SQL = `
     SELECT
       special_pricing.id,
@@ -50,8 +50,12 @@ export async function getSpecialPricing() {
 
 export async function getSpecial_Pricing() {
   const SQL = `
-    SELECT * FROM special_pricing
-    `;
+    SELECT 
+      sp.*,
+      p.product_name
+    FROM special_pricing sp
+    JOIN products p ON sp.product_id = p.id
+  `;
   const { rows } = await db.query(SQL);
   return rows;
 }

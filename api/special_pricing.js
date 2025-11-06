@@ -14,22 +14,7 @@ export default router;
 router.route("/special_pricing").get(async (req, res) => {
   const special_price = await getSpecial_Pricing();
   res.send(special_price);
-});
-
-router.route("/special_pricing/active_special").get(async (req, res) => {
-  const activeSpecial = await getActiveSpecials();
-  res.json({
-    activeSpecial,
-  });
-});
-
-router.route("/special_pricing/:id").get(async (req, res) => {
-  const special_priceById = await getSpecial_Pricing(req.params.id);
-  res.send(special_priceById);
-});
-
-router
-  .route("/special_pricing")
+})
   .post(
     requireAuth,
     requireRole([1]),
@@ -54,13 +39,6 @@ router
         return res.status(400).json({
           error: "Invalid user_id",
           message: "Not a valid user",
-        });
-      }
-
-      if (!Number.isInteger(price)) {
-        return res.status(400).json({
-          error: "Special price is not a number",
-          message: "Special price is not a number",
         });
       }
 
@@ -99,3 +77,16 @@ router
       });
     }
   );
+
+router.route("/special_pricing/active_special").get(async (req, res) => {
+  const activeSpecial = await getActiveSpecials();
+  res.json({
+    activeSpecial,
+  });
+});
+
+router.route("/special_pricing/:id").get(async (req, res) => {
+  const special_priceById = await getSpecial_Pricing(req.params.id);
+  res.send(special_priceById);
+});
+
