@@ -14,7 +14,7 @@ import productsRouter from './api/products.js';
 import specialPricingRouter from './api/special_pricing.js';
 import customer_category_pricingRouter from './api/customer_category_pricing.js'
 
-app.use(cors({ origin: process.env.CORS_ORIGIN ?? /localhost/ }));
+app.use(cors());
 
 app.use(morgan("dev"));
 
