@@ -29,6 +29,7 @@ app.use(orderItemsRouter);
 app.use(ordersRouter);
 app.use(productsRouter);
 app.use(specialPricingRouter);
+app.use(pingRouter);
 
 app.get("/", (req, res) => res.send("Hello, World!"));
 
