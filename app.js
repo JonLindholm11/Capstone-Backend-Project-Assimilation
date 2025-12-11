@@ -13,6 +13,7 @@ import ordersRouter from './api/orders.js';
 import productsRouter from './api/products.js';
 import specialPricingRouter from './api/special_pricing.js';
 import customer_category_pricingRouter from './api/customer_category_pricing.js'
+import pingRouter from './api/ping.js'
 
 app.use(cors());
 
