@@ -2,8 +2,8 @@ import pg from "pg";
 
 const options = { connectionString: process.env.DATABASE_URL };
 
-// Need SSL for external database connection
-if (process.env.NODE_ENV === "production") {
+// SSL configuration for production (Supabase)
+if (process.env.NODE_ENV === "production" || process.env.DATABASE_URL?.includes('supabase')) {
   options.ssl = { rejectUnauthorized: false };
 }
 
